@@ -1,8 +1,28 @@
 import os, time
 
+def login(): 
+    print("="*70)
+    print("Selamat Datang di DigiMap! Silahkan Masukkan Kredensial disini")
+    print("="*70)
+    username    = input("Masukkan Username disini   : ")
+    NIM         = input("Masukkan NIM disini        : ")
+    password    = input("Masukkan Password disini   : ")
+    if username in user_data and NIM == user_data[username]["NIM"] and password == user_data[username]["password"]:
+        print("="*70)
+        print("Login Berhasil!")
+        print("="*70)
+    else:
+        print("="*70)
+        print("Username, NIM, atau Password tidak Valid!")
+        print("="*70)
+
+user_data   = {
+        "fjribgs"       : {"NIM": "2403807", "password": "admin123"},
+        "sayangallah"   : {"NIM": "2401208", "password": "admin123"}
+} 
+
 def register():
     print("="*50)
-    print("*"*25)
     print("Form Register User DIGIMAP <3 ")
     print("="*50)
     nama = input("Masukkan Nama Anda : ")
@@ -45,6 +65,7 @@ def pilih():
         print("Anda memilih Form Login User \nSilakan tunggu sebentar, anda akan di alihkan ke formn login")
         time.sleep(2)
         os.system("cls")
+        login()
     elif opsi.lower() == "exit" :
         print("Anda telah memilih exit program DIGIMAP")
         time.sleep(2)
