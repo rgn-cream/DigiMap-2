@@ -2,6 +2,7 @@ import os, time
 
 def register():
     print("="*50)
+    print("*"*50)
     print("Form Register User DIGIMAP <3 ")
     print("="*50)
     nama = input("Masukkan Nama Anda : ")
