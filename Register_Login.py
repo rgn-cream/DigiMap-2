@@ -1,8 +1,8 @@
 import os, time, json
 
 def load_data():
-    if os.path.exists("D:/DIGIMAP/Data.json"):
-        file = open("D:/DIGIMAP/Data.json")
+    if os.path.exists("D:/DIGIMAP/DataReg.json"):
+        file = open("D:/DIGIMAP/DataReg.json")
         data = json.load(file)
         file.close()
         return data 
@@ -11,7 +11,7 @@ def load_data():
     
 def save_data(data):
     """Menyimpan data pengguna ke file JSON."""
-    with open("D:/DIGIMAP/Data.json", "w") as file:
+    with open("D:/DIGIMAP/DataReg.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def login(): 
@@ -33,22 +33,6 @@ def login():
         print("="*70)
         print("Username, NIM, atau Password tidak Valid!")
         print("="*70)
-        
-    opsi = input("Apakah anda ingin kembali ke menu utama?(Y/N) ")
-    if opsi.lower() == "y":
-        print("\nAnda akan dialihkan ke menu utama, mohon tunggu sebentar")
-        time.sleep(2)
-        os.system("cls")
-        pilih()
-    elif opsi.lower() == "n":
-        time.sleep(2)
-        print("\nYaudah kalo gamau, Terimakasih telah melakukan Registrasi di DIGIMAP wofyu <3")
-    else:
-        print("\nMohon maaf pilihan anda tidak tersedia. Anda akan dialihkan ke menu utama")
-        time.sleep(2)
-        os.system("cls")
-        mulai()
-
 
 def register():
     print("="*70)
