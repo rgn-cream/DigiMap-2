@@ -1,13 +1,31 @@
-import os, time
+import os, time, json
+
+def load_data():
+    if os.path.exists("D:/DIGIMAP/Data.json"):
+        file = open("D:/DIGIMAP/Data.json")
+        data = json.load(file)
+        file.close()
+        return data 
+    else:
+        return{}
+    
+def save_data(data):
+    """Menyimpan data pengguna ke file JSON."""
+    with open("D:/DIGIMAP/Data.json", "w") as file:
+        json.dump(data, file, indent=4)
 
 def login(): 
     print("="*70)
     print("Selamat Datang di DigiMap! Silahkan Masukkan Kredensial disini")
     print("="*70)
-    username    = input("Masukkan Username disini   : ")
-    NIM         = input("Masukkan NIM disini        : ")
-    password    = input("Masukkan Password disini   : ")
-    if username in user_data and NIM == user_data[username]["NIM"] and password == user_data[username]["password"]:
+    username = input("Masukkan Username disini   : ")
+    nim = input("Masukkan NIM disini        : ")
+    password = input("Masukkan Password disini   : ")
+
+    data = load_data()
+    user_data = data.get(username)
+
+    if user_data and user_data["NIM"] == nim and user_data["password"] == password:
         print("="*70)
         print("Login Berhasil!")
         print("="*70)
@@ -15,23 +33,8 @@ def login():
         print("="*70)
         print("Username, NIM, atau Password tidak Valid!")
         print("="*70)
-
-user_data   = {
-        "fjribgs"       : {"NIM": "2403807", "password": "admin123"},
-        "sayangallah"   : {"NIM": "2401208", "password": "admin123"}
-} 
-
-def register():
-    print("="*50)
-    print("Form Register User DIGIMAP <3 ")
-    print("="*50)
-    nama = input("Masukkan Nama Anda : ")
-    username = input("Masukkan Username Anda : ")
-    password = input("Masukkan password : ")
-    nim = input("Masukkan NIM : ")
-    simpan(nama,username,password,nim)
-    print("\nYeay! Data Berhasil Disimpan <3")
-    opsi = input("Apakah anda ingin kembali ke menu utama?(Y/N)")
+        
+    opsi = input("Apakah anda ingin kembali ke menu utama?(Y/N) ")
     if opsi.lower() == "y":
         print("\nAnda akan dialihkan ke menu utama, mohon tunggu sebentar")
         time.sleep(2)
@@ -40,41 +43,76 @@ def register():
     elif opsi.lower() == "n":
         time.sleep(2)
         print("\nYaudah kalo gamau, Terimakasih telah melakukan Registrasi di DIGIMAP wofyu <3")
-    else :
+    else:
         print("\nMohon maaf pilihan anda tidak tersedia. Anda akan dialihkan ke menu utama")
         time.sleep(2)
         os.system("cls")
         mulai()
 
-def simpan (nama,username,password,nim):
-    file = open("D:\DIGIMAP\DataReg.txt","a")
-    file.write("\n"+nama+","+username+","+password+","+nim)
 
-def mulai ():
+def register():
+    print("="*70)
+    print("Form Register User DIGIMAP <3 ")
+    print("="*70)
+    nama = input("Masukkan Nama Anda : ")
+    username = input("Masukkan Username Anda : ")
+    password = input("Masukkan password : ")
+    nim = input("Masukkan NIM : ")
+
+    data = load_data()
+    
+    if username in data:
+        print("\nUsername sudah terdaftar, silakan gunakan username lain.")
+        return
+
+    data[username] = {
+        "nama": nama,
+        "NIM": nim,
+        "password": password
+    }
+    save_data(data)
+    print("\nYeay! Data Berhasil Disimpan <3")
+
+    opsi = input("Apakah anda ingin kembali ke menu utama?(Y/N) ")
+    if opsi.lower() == "y":
+        print("\nAnda akan dialihkan ke menu utama, mohon tunggu sebentar")
+        time.sleep(2)
+        os.system("cls")
+        pilih()
+    elif opsi.lower() == "n":
+        time.sleep(2)
+        print("\nYaudah kalo gamau, Terimakasih telah melakukan Registrasi di DIGIMAP wofyu <3")
+    else:
+        print("\nMohon maaf pilihan anda tidak tersedia. Anda akan dialihkan ke menu utama")
+        time.sleep(2)
+        os.system("cls")
+        mulai()
+
+def mulai():
     print("Selamat Datang di DIGIMAP! \nSilakan Masukan Kata (Reg) Untuk Register User Baru | (Login) Untuk Login User")
     pilih()
 
 def pilih():
     opsi = input("Masukkan kata (Reg) atau (Login) atau (Exit) : ")
-    if opsi.lower() == "reg" :
-        print("Anda memilih Form Registrasi User \nSilakan tunggu sebentar, anda akan di alihkan ke formn registrasi")
+    if opsi.lower() == "reg":
+        print("Anda memilih Form Registrasi User \nSilakan tunggu sebentar, anda akan dialihkan ke form registrasi")
         time.sleep(2)
         os.system("cls")
         register()
-    elif opsi.lower() == "login" :
-        print("Anda memilih Form Login User \nSilakan tunggu sebentar, anda akan di alihkan ke formn login")
+    elif opsi.lower() == "login":
+        print("Anda memilih Form Login User \nSilakan tunggu sebentar, anda akan dialihkan ke form login")
         time.sleep(2)
         os.system("cls")
         login()
-    elif opsi.lower() == "exit" :
+    elif opsi.lower() == "exit":
         print("Anda telah memilih exit program DIGIMAP")
         time.sleep(2)
         os.system("cls")
         print("Terimakasih telah menggunakan DIGIMAP, see you")
         time.sleep(2)
         exit()
-    else: 
-        print("Mohn maaf pilihan anda tidak tersedia")
+    else:
+        print("Mohon maaf pilihan anda tidak tersedia")
         time.sleep(2)
         os.system("cls")
         mulai()
