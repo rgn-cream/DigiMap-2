@@ -7,7 +7,8 @@ def login():
     username    = input("Masukkan Username disini   : ")
     NIM         = input("Masukkan NIM disini        : ")
     password    = input("Masukkan Password disini   : ")
-    if username in user_data and NIM == user_data[username]["NIM"] and password == user_data[username]["password"]:
+    file = open("D:\DIGIMAP\DataReg.py","r")
+    if username in file and NIM == file[username]["NIM"] and password == file[username]["password"]:
         print("="*70)
         print("Login Berhasil!")
         print("="*70)
