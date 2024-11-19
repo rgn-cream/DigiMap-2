@@ -94,6 +94,16 @@ def register():
         os.system("cls")
         mulai()
 
+def tampilkan_profil(profil):
+    print("=== Profil Pengguna ===")
+    print(f"Nama: {profil['nama']}")
+    print(f"Username: {profil['username']}")
+    print(f"NIM: {profil['nim']}")
+    print(f"Kelas: {profil['kelas']}")
+    print(f"Tanggal Lahir: {profil['ttl']}")
+    print(f"Email: {profil['email']}")
+    mulai()
+
 def mulai():
     print("Selamat Datang di DIGIMAP! \nSilakan Masukan Kata (Reg) Untuk Register User Baru | (Login) Untuk Login User")
     pilih()
@@ -110,6 +120,11 @@ def pilih():
         time.sleep(2)
         os.system("cls")
         login()
+    elif opsi.lower() == "profil":
+        print("Anda memilih profil User \nSilakan tunggu sebentar, anda akan dialihkan ke profil pengguna")
+        time.sleep(2)
+        os.system("cls")
+        tampilkan_profil()
     elif opsi.lower() == "exit":
         print("Anda telah memilih exit program DIGIMAP")
         time.sleep(2)
@@ -124,3 +139,29 @@ def pilih():
         mulai()
 mulai()
 
+
+# Menu utama
+def main():
+    while True:
+        print("="*40)
+        print(" Menu ")
+        print("="*40)
+        print("1. Tambah Profil Baru ")
+        print("2. Tampilkan Profil")
+        print("3. Keluar")
+        print("="*40)
+        
+        pilihan = input("Pilih opsi (1/2/3): ")
+        print("="*40)
+
+        if pilihan == "1":
+            register()
+        elif pilihan == "2":
+            tampilkan_profil()
+        elif pilihan == "3":
+            print("Terima kasih, sampai bertemu kembali :D ")
+            break
+        else:
+            print("Error, silahkan coba lagi.")
+            
+main()
