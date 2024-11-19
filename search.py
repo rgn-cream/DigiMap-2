@@ -39,7 +39,7 @@ jadwal_kuliah = {
 
 
 
-    ],
+   ],
     "Selasa": [
         {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "PGSD 1A", "kode_mk": "GD569", "nama_mk": "Dasar Matematika", "sks": 4, "dosen": ["Dr. Tita Mulyati, M.Pd."], "ruang": "20.4B.05.002"},
         {"waktu_mulai": "10:20", "waktu_selesai": "12:00", "kelas": "PGSD 1A", "kode_mk": "DK300", "nama_mk": "Landasan Pendidikan", "sks": 2, "dosen": ["Dr. Yusuf Tri Herlambang, M.Pd."], "ruang": "20.4B.05.006"},
@@ -53,7 +53,20 @@ jadwal_kuliah = {
         {"waktu_mulai": "09:30", "waktu_selesai": "12:00", "kelas": "TEKKOM 1A", "kode_mk": "PT400", "nama_mk": "Keterampilan Bahasa Inggris", "sks": 3, "dosen": ["Winti Ananthia, S.Pd., M.Pd."], "ruang": "20.4B.05.009"},
         {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "TEKKOM 1B", "kode_mk": "TR102", "nama_mk": "Matematika Diskrit", "sks": 4, "dosen": ["Devi Apriyanti Rimadhani Agustini, S.Si., M.Si."], "ruang": "20.4E.01.004"},
         {"waktu_mulai": "10:20", "waktu_selesai": "12:00", "kelas": "TEKKOM 1B", "kode_mk": "KU106", "nama_mk": "Pendidikan Bahasa Indonesia", "sks": 2, "dosen": ["Fully Rakhmayanti, M.Pd."], "ruang": "20.4B.05.005"},
-        {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "TEKKOM 1C", "kode_mk": "TR200", "nama_mk": "Pemrograman Dasar", "sks": 4, "dosen": ["Dr. Eng. Munawir, S.Kom., M.T."], "ruang": "20.4E.02.001"} #last edited
+        {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "TEKKOM 1C", "kode_mk": "TR200", "nama_mk": "Pemrograman Dasar", "sks": 4, "dosen": ["Dr. Eng. Munawir, S.Kom., M.T."], "ruang": "20.4E.02.001"},
+        {"waktu_mulai": "10:20", "waktu_selesai": "12:00", "kelas": "PGPAUD 1A", "kode_mk": "KU110", "nama_mk": "Pendidikan Pancasila", "sks": 2, "dosen": ["Yayang Furi Furnamasari, M.Pd."], "ruang": "20.4B.03.001"},
+        {"waktu_mulai": "13:00", "waktu_selesai": "15:30", "kelas": "PGPAUD 1A", "kode_mk": "UD100", "nama_mk": "Konsep Dasar PAUD", "sks": 3, "dosen": ["Dr. Ai Sutini, M.Pd."], "ruang": "20.4B.03.002"},
+        {"waktu_mulai": "10:20", "waktu_selesai": "12:00", "kelas": "PGPAUD 1B", "kode_mk": "KU113", "nama_mk": "Apresiasi Seni", "sks": 2, "dosen": ["Moh. Helmi Ismael, M.Pd."], "ruang": "20.4B.03.002"},
+        {"waktu_mulai": "13:00", "waktu_selesai": "15:30", "kelas": "PGPAUD 1B", "kode_mk": "PT400", "nama_mk": "Keterampilan Bahasa Inggris", "sks": 3, "dosen": ["Winti Ananthia, M.Ed."], "ruang": "20.4B.03.006"},
+        {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "PGPAUD 1C", "kode_mk": "UD110", "nama_mk": "Psikologi Perkembangan Anak", "sks": 4, "dosen": ["Ririn Despriliani, S.Pd., M.Si."], "ruang": "20.4B.03.001"},
+        {"waktu_mulai": "08:40", "waktu_selesai": "12:00", "kelas": "RPL 1A", "kode_mk": "RL117", "nama_mk": "Dasar Pemrograman", "sks": 4, "dosen": ["Indira Syawanodya, M.Kom."], "ruang": "20.4E.02.006"},
+        {"waktu_mulai": "13:00", "waktu_selesai": "15:30", "kelas": "RPL 1A", "kode_mk": "RL115", "nama_mk": "Literasi Teknologi Informasi dan Komunikasi", "sks": 3, "dosen": ["Yulia Retnowati, S.Pd., M.T."], "ruang": "20.4E.02.006"},
+        {"waktu_mulai": "07:00", "waktu_selesai": "10:20", "kelas": "RPL 1B", "kode_mk": "RL118", "nama_mk": "Matematika Dasar", "sks": 4, "dosen": ["Raditya Muhammad, M.T."], "ruang": "20.4B.04.006"},
+        {"waktu_mulai": "07:00", "waktu_selesai": "09:30", "kelas": "PMM 1A", "kode_mk": "PM200", "nama_mk": "Nirmana", "sks": 3, "dosen": ["Dian Rinjani, S.Pd., M.Pd."], "ruang": "20.4B.04.001"},
+        {"waktu_mulai": "10:20", "waktu_selesai": "12:00", "kelas": "PMM 1A", "kode_mk": "KU105", "nama_mk": "Pendidikan Kewarganegaraan", "sks": 2, "dosen": ["Dr. Dinie Anggraeni Dewi, M.Pd."], "ruang": "20.4B.03.006"},
+        {"waktu_mulai": "07:00", "waktu_selesai": "09:30", "kelas": "PMM 1B", "kode_mk": "PM101", "nama_mk": "Matematika Diskrit", "sks": 3, "dosen": ["Dr. Yeni Yuniarti, M.Pd."], "ruang": "20.4B.03.007"},
+        {"waktu_mulai": "09:30", "waktu_selesai": "12:00", "kelas": "PMM 1B", "kode_mk": "PM200", "nama_mk": "Nirmana", "sks": 3, "dosen": ["Dian Rinjani, S.Pd., M.Pd."], "ruang": "20.4E.04.002"},
+        {"waktu_mulai": "13:00", "waktu_selesai": "15:30", "kelas": "PMM 1C", "kode_mk": "PM101", "nama_mk": "Matematika Diskrit", "sks": 3, "dosen": ["Dr. Yeni Yuniarti, M.Pd."], "ruang": "20.4B.02.006"} # terakhir edit
         
 
     ],
