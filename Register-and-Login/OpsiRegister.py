@@ -1,8 +1,8 @@
 import os, time, json
 
 def load_data():
-    if os.path.exists("D:/DIGIMAP/Data.json"):
-        file = open("D:/DIGIMAP/Data.json")
+    if os.path.exists("D:\DIGIMAP\Register-and-Login\Data.json"): 
+        file = open("D:\DIGIMAP\Register-and-Login\Data.json")
         data = json.load(file)
         file.close()
         return data 
@@ -10,8 +10,7 @@ def load_data():
         return{}
     
 def save_data(data):
-    """Menyimpan data pengguna ke file JSON."""
-    with open("D:/DIGIMAP/Data.json", "w") as file:
+    with open("D:\DIGIMAP\Register-and-Login\Data.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def login(): 
@@ -58,6 +57,9 @@ def register():
     username = input("Masukkan Username Anda : ")
     password = input("Masukkan password : ")
     nim = input("Masukkan NIM : ")
+    kelas = input("Masukkan kelas : ")
+    ttl = input("Masukkan tanggal lahir (tgl-bulan-tahun) : ")
+    email = input("Masukkan email : ")
 
     data = load_data()
     
@@ -68,8 +70,12 @@ def register():
     data[username] = {
         "nama": nama,
         "NIM": nim,
-        "password": password
+        "password": password,
+        "Kelas": kelas, 
+        "TTL": ttl,
+        "email":email
     }
+
     save_data(data)
     print("\nYeay! Data Berhasil Disimpan <3")
 
@@ -117,3 +123,4 @@ def pilih():
         os.system("cls")
         mulai()
 mulai()
+
