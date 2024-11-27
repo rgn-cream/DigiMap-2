@@ -19,5 +19,37 @@
         "Kelas": "e",
         "TTL": "dde",
         "email": "dee"
+    },
+    "rere": {
+        "nama": "regina",
+        "NIM": "24433",
+        "password": "1234",
+        "Kelas": "1b",
+        "TTL": "26 juli 2007",
+        "email": "reginanf@gmial.com"
+    },
+    "2": {
+        "nama": "1",
+        "NIM": "4",
+        "password": "3",
+        "Kelas": "5",
+        "TTL": "6",
+        "email": "6"
+    },
+    "saya": {
+        "nama": "halo",
+        "NIM": "haha",
+        "password": "regina",
+        "Kelas": "mam",
+        "TTL": "yoi",
+        "email": "ree"
+    },
+    "username": {
+        "nama": "aku",
+        "NIM": "2333",
+        "password": "123",
+        "Kelas": "1b",
+        "TTL": "26 juli 2007",
+        "email": "rerr@gmail.com"
     }
 }
