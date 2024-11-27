@@ -43,5 +43,13 @@
         "Kelas": "mam",
         "TTL": "yoi",
         "email": "ree"
+    },
+    "username": {
+        "nama": "aku",
+        "NIM": "2333",
+        "password": "123",
+        "Kelas": "1b",
+        "TTL": "26 juli 2007",
+        "email": "rerr@gmail.com"
     }
 }
