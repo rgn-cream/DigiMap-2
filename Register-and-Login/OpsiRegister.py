@@ -1,8 +1,8 @@
 import os, time, json
 
 def load_data():
-    if os.path.exists("D:\\DIGIMAP\\Register-and-Login\\Data.json"): 
-        file = open("D:\\DIGIMAP\\Register-and-Login\\Data.json")
+    if os.path.exists("https://github.com/Muzaaja/DigiMap/blob/main/Register-and-Login/Data.json"): 
+        file = open("https://github.com/Muzaaja/DigiMap/blob/main/Register-and-Login/Data.json")
         data = json.load(file)
         file.close()
         return data 
@@ -10,7 +10,7 @@ def load_data():
         return{}
     
 def save_data(data):
-    with open("D:\\DIGIMAP\\Register-and-Login\\Data.json", "w") as file:
+    with open("https://github.com/Muzaaja/DigiMap/blob/main/Register-and-Login/Data.json", "w") as file:
         json.dump(data, file, indent=4)
     
 def login_user(): 
@@ -87,7 +87,7 @@ def register():
     tampilkan_profil()
 
 def load_profil():
-    with open("D:\\DIGIMAP\\Register-and-Login\\Data.json", "r") as file:
+    with open("https://github.com/Muzaaja/DigiMap/blob/main/Register-and-Login/Data.json", "r") as file:
         data = json.load(file)
     return data
 
