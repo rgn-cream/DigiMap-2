@@ -1,0 +1,57 @@
+{
+    "reregina": {
+        "nama": "regina",
+        "NIM": "2406043",
+        "password": "admin123"
+    },
+    "rere": {
+        "nama": "regina",
+        "NIM": "2406043",
+        "password": "admin123"
+    },
+    "abc": {
+        "nama": "regina",
+        "NIM": "244433",
+        "password": "lahbentar",
+        "Kelas": "1b",
+        "TTL": "26 juli 2007",
+        "email": "reginan@gmail.com"
+    },
+    "hah": {
+        "nama": "apa",
+        "NIM": "344",
+        "password": "yy",
+        "Kelas": "4g",
+        "TTL": "26 jul jj",
+        "email": "emej5@gmial.com"
+    },
+    "rr": {
+        "nama": "tt",
+        "NIM": "ree",
+        "password": "rr",
+        "Kelas": "re",
+        "TTL": "we",
+        "email": "re"
+    },
+    "r": {
+        "nama": "r",
+        "NIM": "r",
+        "password": "r",
+        "Kelas": "r",
+        "TTL": "r",
+        "email": "r"
+    },
+    "re": {
+        "nama": "re",
+        "NIM": "re",
+        "password": "re",
+        "Kelas": "re",
+        "TTL": "re",
+        "email": "re"
+    },
+    "e": {
+        "nama": "em",
+        "NIM": "e",
+        "password": "e"
+    }
+}
