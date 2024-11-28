@@ -2,14 +2,14 @@ import json
 import os
 
 # Nama file untuk database JSON
-FILE_DATABASE = "Data.json"
+FILE_DATABASE = "data_login.json"
 
 # Fungsi untuk memuat data dari file JSON
 def muat_data():
     if os.path.exists(FILE_DATABASE):
         with open(FILE_DATABASE, "r") as file:
             return json.load(file)
-    return {}
+    return {"users": {}, "admin": {"username": "admin", "password": "admin123"}}
 
 # Fungsi untuk menyimpan data ke file JSON
 def simpan_data(data):
@@ -19,12 +19,12 @@ def simpan_data(data):
 # Data pengguna (diambil dari file JSON)
 data_pengguna = muat_data()
 
-# Fungsi untuk menambahkan profil baru
+# Fungsi untuk menambahkan profil pengguna baru
 def tambah_profil():
     username = input("Masukkan username: ")
 
     # Memastikan username belum terpakai
-    if username in data_pengguna:
+    if username in data_pengguna["users"]:
         print("Username sudah ada. Silakan pilih username lain.")
         return
 
@@ -37,7 +37,7 @@ def tambah_profil():
     email = input("Masukkan email: ")
 
     # Menyimpan data ke dalam dictionary
-    data_pengguna[username] = {
+    data_pengguna["users"][username] = {
         "password": password,
         "profil": {
             "nama": nama,
@@ -61,41 +61,78 @@ def tampilkan_data_pengguna(profil):
     print(f"No Telepon: {profil['no_telepon']}")
     print(f"Email: {profil['email']}")
 
-# Fungsi login dan tampilkan profil
-def tampilkan_profil():
+# Fungsi login admin
+def login_admin():
+    username = input("Masukkan username admin: ")
+    password = input("Masukkan password admin: ")
+
+    # Verifikasi login admin
+    if username == data_pengguna["admin"]["username"] and password == data_pengguna["admin"]["password"]:
+        print("Login Admin berhasil!")
+    else:
+        print("Username atau password admin salah.")
+
+# Fungsi login pengguna
+def login_pengguna():
     username = input("Masukkan username: ")
     password = input("Masukkan password: ")
 
     # Cek apakah username dan password cocok
-    if username in data_pengguna and data_pengguna[username]["password"] == password:
+    if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
         print("Login berhasil!")
-        tampilkan_data_pengguna(data_pengguna[username]["profil"])
+        tampilkan_data_pengguna(data_pengguna["users"][username]["profil"])
     else:
         print("Username atau password salah.")
+
+# Fungsi untuk submenu login pengguna
+def menu_pengguna():
+    while True:
+        print("\n=== Login Pengguna ===")
+        print("1. Login")
+        print("2. Sign Up / Register")
+        pilihan = input("Pilih opsi (1/2): ")
+
+        if pilihan == "1":
+            login_pengguna()
+            break
+        elif pilihan == "2":
+            tambah_profil()
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+
+# Fungsi login tamu
+def login_tamu():
+    print("=== Login Tamu ===")
+    print("Halo, Tamu! Anda login sebagai pengguna tanpa profil.")
 
 # Menu utama
 def main():
     while True:
+        print("\n" + "=" * 40)
+        print(" Menu Utama ")
         print("=" * 40)
-        print(" Menu ")
-        print("=" * 40)
-        print("1. Tambah Profil Baru ")
-        print("2. Tampilkan Profil")
-        print("3. Keluar")
+        print("1. Login Admin")
+        print("2. Login Pengguna")
+        print("3. Login Tamu")
+        print("4. Keluar")
         print("=" * 40)
 
-        pilihan = input("Pilih opsi (1/2/3): ")
-        print("=" * 40)
+        pilihan = input("Pilih opsi (1/2/3/4): ")
 
         if pilihan == "1":
-            tambah_profil()
+            login_admin()
         elif pilihan == "2":
-            tampilkan_profil()
+            menu_pengguna()
         elif pilihan == "3":
+            login_tamu()
+        elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break
         else:
-            print("Error, silahkan coba lagi.")
+            print("Pilihan tidak valid. Silakan coba lagi.")
 
 # Jalankan program utama
-main()
+if __name__ == "__main__":
+    simpan_data(data_pengguna) 
+    main()

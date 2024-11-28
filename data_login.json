@@ -1,0 +1,19 @@
+{
+    "users": {
+        "zaii": {
+            "password": "zaidan",
+            "profil": {
+                "nama": "zaidan",
+                "NIM": "2404903",
+                "kelas": "RPL 1B",
+                "tanggal_lahir": "22-22-2000",
+                "no_telepon": "20202020220",
+                "email": "zaii@gmail.com"
+            }
+        }
+    },
+    "admin": {
+        "username": "admin",
+        "password": "admin123"
+    }
+}
