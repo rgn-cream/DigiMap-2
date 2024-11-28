@@ -97,5 +97,8 @@ def main():
         else:
             print("Error, silahkan coba lagi.")
 
+def guest():
+    
+
 # Jalankan program utama
 main()
