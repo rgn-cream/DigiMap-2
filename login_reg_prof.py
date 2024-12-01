@@ -112,10 +112,13 @@ def login_pengguna():
         print("="*70)
         print("Login Berhasil!")
         print("="*70)
+        
         print("Tampilkan Profil Anda (Y/N)")
         tampilan = input("Y/N: ")
         if tampilan.lower() == "y":
-            print("DEBUG: Data pengguna setelah login:", data_pengguna["users"][username])
+            time.sleep(2)
+            os.system("cls")
+            tampilkan_profil(data_pengguna["users"][username]["profil"])
         elif tampilan.lower() == "n":
             print("Anda akan kembali ke halaman utama")
         else:
@@ -199,13 +202,11 @@ def main():
             time.sleep(2)
             os.system("cls")
             login_tamu()
+            time.sleep(2)
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
 
-# Jalankan program utama
-if __name__ == "__main__":
-    simpan_data(data_pengguna)
-    main()
+main()
