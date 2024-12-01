@@ -10,6 +10,17 @@
                 "no_telepon": "20202020220",
                 "email": "zaii@gmail.com"
             }
+        },
+        "rere": {
+            "password": "regina123",
+            "profil": {
+                "nama": "regina",
+                "NIM": "00000",
+                "kelas": "1b",
+                "tanggal_lahir": "26-07-07777777",
+                "no_telepon": "098129819219",
+                "email": "rere@gmailcom"
+            }
         }
     },
     "admin": {
