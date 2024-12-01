@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 # Nama file untuk database JSON
 FILE_DATABASE = "data_login.json"
@@ -16,11 +17,26 @@ def simpan_data(data):
     with open(FILE_DATABASE, "w") as file:
         json.dump(data, file, indent=4)
 
+def validasi_tanggal_lahir(tanggal):
+    try:
+        # Pisahkan input
+        hari, bulan, tahun = map(int, tanggal.split("-"))
+
+        # Cek rentang nilai
+        if 1 <= hari <= 31 and 1 <= bulan <= 12 and len(str(tahun)) == 4:
+            return True
+    except:
+        pass  # Abaikan kesalahan jika input tidak sesuai
+    return False
 # Data pengguna (diambil dari file JSON)
 data_pengguna = muat_data()
 
 # Fungsi untuk menambahkan profil pengguna baru
-def tambah_profil():
+def register():
+    print("="*70)
+    print("Form Register User DigiMap")
+    print("="*70)
+
     username = input("Masukkan username: ")
 
     # Memastikan username belum terpakai
@@ -32,7 +48,13 @@ def tambah_profil():
     nama = input("Masukkan nama: ")
     NIM = input("Masukkan NIM: ")
     kelas = input("Masukkan kelas: ")
-    tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ")
+
+    while True:
+        tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ")
+        if validasi_tanggal_lahir(tanggal_lahir):
+            break
+        print("Format tanggal lahir tidak valid. Gunakan format DD-MM-YYYY.")
+
     no_telepon = input("Masukkan no telepon: ")
     email = input("Masukkan email: ")
 
@@ -49,10 +71,13 @@ def tambah_profil():
         }
     }
     simpan_data(data_pengguna)  # Simpan data ke file JSON
+
+    print("="*70)
     print("Profil berhasil ditambahkan!")
+    print("="*70)
 
 # Fungsi untuk menampilkan data profil pengguna
-def tampilkan_data_pengguna(profil):
+def tampilkan_profil(profil):
     print("=== Profil Pengguna ===")
     print(f"Nama: {profil['nama']}")
     print(f"NIM: {profil['NIM']}")
@@ -60,6 +85,7 @@ def tampilkan_data_pengguna(profil):
     print(f"Tanggal Lahir: {profil['tanggal_lahir']}")
     print(f"No Telepon: {profil['no_telepon']}")
     print(f"Email: {profil['email']}")
+
 
 # Fungsi login admin
 def login_admin():
@@ -74,15 +100,48 @@ def login_admin():
 
 # Fungsi login pengguna
 def login_pengguna():
-    username = input("Masukkan username: ")
-    password = input("Masukkan password: ")
+    print("="*70)
+    print("LOGIN")
+    print("="*70)
+    print("Selamat Datang Kembali di DigiMap! Silahkan Masukkan Kredensial disini")
+    print("-"*70)
+    username = input("Masukkan Username   : ")
+    password = input("Masukkan Password   : ")
 
-    # Cek apakah username dan password cocok
     if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
-        print("Login berhasil!")
-        tampilkan_data_pengguna(data_pengguna["users"][username]["profil"])
+        print("="*70)
+        print("Login Berhasil!")
+        print("="*70)
+        
+        print("Tampilkan Profil Anda (Y/N)")
+        tampilan = input("Y/N: ")
+        if tampilan.lower() == "y":
+            time.sleep(2)
+            os.system("cls")
+            tampilkan_profil(data_pengguna["users"][username]["profil"])
+        elif tampilan.lower() == "n":
+            print("Anda akan kembali ke halaman utama")
+        else:
+            print("Pilihan Anda tidak tersedia")
+        
     else:
-        print("Username atau password salah.")
+        print("="*70)
+        print("Username, NIM, atau Password tidak Valid!")
+        print("="*70)
+    
+        opsi = input("Coba lagi?(Y/N) ")
+        if opsi.lower() == "y":
+            os.system("cls")
+            login_pengguna()
+        elif opsi.lower() == "n":
+            time.sleep(2)
+            print("Anda akan kembali ke halaman utama")
+            #HALAMAN UTAMA
+        else:
+            print("\nMohon maaf pilihan anda tidak tersedia. Anda akan dialihkan ke menu utama")
+            time.sleep(2)
+            os.system("cls")
+            menu_pengguna()
 
 # Fungsi untuk submenu login pengguna
 def menu_pengguna():
@@ -93,10 +152,17 @@ def menu_pengguna():
         pilihan = input("Pilih opsi (1/2): ")
 
         if pilihan == "1":
+            print("Anda akan beralih ke form login, mohon tunggu sebentar")
+            time.sleep(2)
+            os.system("cls")
             login_pengguna()
             break
         elif pilihan == "2":
-            tambah_profil()
+            print("Anda akan beralih ke form register, mohon tunggu sebentar")
+            time.sleep(2)
+            os.system("cls")
+            register()
+            time.sleep(2)
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
@@ -105,6 +171,7 @@ def menu_pengguna():
 def login_tamu():
     print("=== Login Tamu ===")
     print("Halo, Tamu! Anda login sebagai pengguna tanpa profil.")
+    print("Sebagai tamu, anda tidak dapat melihat jadwal penggunaan kelas")
 
 # Menu utama
 def main():
@@ -121,18 +188,25 @@ def main():
         pilihan = input("Pilih opsi (1/2/3/4): ")
 
         if pilihan == "1":
+            print("Anda akan masuk sebagai admin, mohon tunggu sbeentar")
+            time.sleep(2)
+            os.system("cls")
             login_admin()
         elif pilihan == "2":
+            print("Anda akan dialihkan ke menu pengguna, mohon tunggu sebentar")
+            time.sleep(2)
+            os.system("cls")
             menu_pengguna()
         elif pilihan == "3":
+            print("Anda akan masuk sebagai tamu")
+            time.sleep(2)
+            os.system("cls")
             login_tamu()
+            time.sleep(2)
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
 
-# Jalankan program utama
-if __name__ == "__main__":
-    simpan_data(data_pengguna) 
-    main()
+main()
