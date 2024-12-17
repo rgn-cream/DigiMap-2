@@ -216,13 +216,21 @@ def login_pengguna():
         print("Username dan Password tidak Valid!")
         print("="*70)
 
+def logout():
+    print("\nAnda akan logout dari sesi saat ini...")
+    time.sleep(2)
+    os.system("cls" if os.name == "nt" else "clear")
+    print("Anda telah berhasil logout!\n")
+    main()
+
 # Fungsi untuk submenu login pengguna
 def menu_pengguna():
     while True:
-        print("\n=== Login Pengguna ===")
+        print("\n=== Menu Pengguna ===")
         print("1. Login")
         print("2. Sign Up / Register")
-        pilihan = input("Pilih opsi (1/2): ")
+        print("3. Logout")
+        pilihan = input("Pilih opsi (1/2/3): ")
 
         if pilihan == "1":
             print("Anda akan beralih ke form login, mohon tunggu sebentar")
@@ -237,6 +245,9 @@ def menu_pengguna():
             register()
             time.sleep(2)
             break
+        elif pilihan == "3":
+            logout()
+            break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
 
@@ -250,7 +261,7 @@ def login_tamu():
 def main():
     while True:
         print("\n" + "=" * 40)
-        print(" Menu Utama ")
+        print(" Menu Login ")
         print("=" * 40)
         print("1. Login Admin")
         print("2. Login Pengguna")
