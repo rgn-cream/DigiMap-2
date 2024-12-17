@@ -1,114 +1,232 @@
-jadwal_list = []
+import json
 
-# Variabel untuk mengatur ID auto-increment mulai dari 1
-id_counter = 1
+# Fungsi untuk membaca data dari file JSON
+def baca_data(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
+    except json.JSONDecodeError:
+        print("Error dalam membaca file JSON.")
+        return {}
 
-# Fungsi untuk menambah jadwal kuliah
-def tambah_jadwal(jadwal_list):
-    global id_counter
-    print("\nMenambahkan Jadwal Kuliah:")
-    
-    # Mengambil input dari pengguna
-    hari = input("Hari: ")
-    waktu_mulai = input("Waktu Mulai (format HH:MM): ")
-    waktu_selesai = input("Waktu Selesai (format HH:MM): ")
-    kelas = input("Kelas (format: RPL 1B): ")
-    kode_mk = input("Kode Mata Kuliah (format MK01): ")
-    nama_mk = input("Nama Mata Kuliah: ")
-    sks = int(input("Jumlah SKS: "))
-    dosen = input("Nama dosen: ")
-    ruang = input("Ruang: ")
+# Fungsi untuk menyimpan data ke file JSON
+def simpan_data(file_path, data):
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+        
+def tampilkan_jadwal(hari, jadwal):
+    print(f"\nJadwal untuk {hari}:")
+    print(f"{'No':<4}{'Hari':<12}{'Waktu Mulai':<15}{'Waktu Selesai':<15}{'Jurusan':<12}{'Kelas':<12}{'Kode MK':<10}{'Nama MK':<25}{'SKS':<5}{'Dosen':<40}{'Ruang':<15}")
+    print("=" * 160)
+    for idx, item in enumerate(jadwal):
+        dosen = ", ".join(item["dosen"]) if isinstance(item["dosen"], list) else item["dosen"]
+        print(f"{idx + 1:<4}{hari:<12}{item['waktu_mulai']:<15}{item['waktu_selesai']:<15}{item['jurusan']:<12}{item['kelas']:<12}{item['kode_mk']:<10}{item['nama_mk']:<25}{item['sks']:<5}{dosen:<40}{item['ruang']:<15}")
 
-    # Menyimpan jadwal dalam dictionary dengan ID auto-increment
-    jadwal = {
-        "id": id_counter,
-        "hari": hari,
+# Fungsi untuk menambahkan jadwal baru
+def tambah_jadwal(file_path):
+    data_jadwal = baca_data(file_path)
+
+    # Meminta input hari
+    while True:
+        hari = input("Masukkan hari (misal: Senin, Selasa, dst.): ").capitalize().strip()
+        if not hari:
+            print("Error: Hari tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input waktu mulai
+    while True:
+        waktu_mulai = input("Masukkan waktu mulai (misal: 13:00): ").strip()
+        if not waktu_mulai:
+            print("Error: Waktu mulai tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input waktu selesai
+    while True:
+        waktu_selesai = input("Masukkan waktu selesai (misal: 14:40): ").strip()
+        if not waktu_selesai:
+            print("Error: Waktu selesai tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input jurusan
+    while True:
+        jurusan = input("Masukkan jurusan: ").strip()
+        if not jurusan:
+            print("Error: Jurusan tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input kelas
+    while True:
+        kelas = input("Masukkan kelas: ").strip()
+        if not kelas:
+            print("Error: Kelas tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input kode mata kuliah
+    while True:
+        kode_mk = input("Masukkan kode mata kuliah: ").strip()
+        if not kode_mk:
+            print("Error: Kode mata kuliah tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input nama mata kuliah
+    while True:
+        nama_mk = input("Masukkan nama mata kuliah: ").strip()
+        if not nama_mk:
+            print("Error: Nama mata kuliah tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input SKS
+    while True:
+        sks = input("Masukkan SKS: ").strip()
+        if not sks:
+            print("Error: SKS tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input dosen
+    while True:
+        dosen = input("Masukkan nama dosen (pisahkan dengan koma jika lebih dari satu): ").strip()
+        if not dosen:
+            print("Error: Nama dosen tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Meminta input ruang
+    while True:
+        ruang = input("Masukkan ruang: ").strip()
+        if not ruang:
+            print("Error: Ruang tidak boleh kosong. Silakan masukkan lagi.")
+        else:
+            break
+
+    # Membuat entri jadwal baru
+    jadwal_baru = {
         "waktu_mulai": waktu_mulai,
         "waktu_selesai": waktu_selesai,
+        "jurusan": jurusan,
         "kelas": kelas,
         "kode_mk": kode_mk,
         "nama_mk": nama_mk,
         "sks": sks,
-        "dosen": dosen,
+        "dosen": [dosen.strip() for dosen in dosen.split(',')],
         "ruang": ruang
     }
 
-    # Menambahkan jadwal ke list
-    jadwal_list.append(jadwal)
-    
-    # Meningkatkan counter ID untuk jadwal berikutnya
-    id_counter += 1
+    # Menambahkan jadwal baru ke dalam data
+    if hari not in data_jadwal:
+        data_jadwal[hari] = []
+    data_jadwal[hari].append(jadwal_baru)
+
+    # Menyimpan data kembali ke file JSON
+    simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil ditambahkan!")
 
-# Fungsi untuk menampilkan semua jadwal
-def tampilkan_jadwal(jadwal_list):
-    if not jadwal_list:
-        print("Tidak ada jadwal yang tersedia.")
-        return
-    print("\nDaftar Jadwal Kuliah:")
-    for jadwal in jadwal_list:
-        print(f"ID: {jadwal['id']}, Hari: {jadwal['hari']}, Waktu: {jadwal['waktu_mulai']} - {jadwal['waktu_selesai']}, Mata Kuliah: {jadwal['nama_mk']}")
+# Fungsi untuk mengedit jadwal
+def edit_jadwal(file_path):
+    data_jadwal = baca_data(file_path)
 
-# Fungsi untuk mengupdate jadwal berdasarkan ID
-def update_jadwal(jadwal_list):
-    jadwal_id = int(input("\nMasukkan ID jadwal yang ingin diubah: "))
-    jadwal = next((item for item in jadwal_list if item['id'] == jadwal_id), None)
-    
-    if jadwal is None:
-        print("Jadwal dengan ID tersebut tidak ditemukan!")
+    # Meminta input hari
+    hari = input("Masukkan hari yang ingin diedit: ").capitalize().strip()
+    if hari not in data_jadwal:
+        print("Error: Hari tidak ditemukan.")
         return
-    
-    print("Mengubah Jadwal Kuliah:")
-    jadwal['hari'] = input(f"Hari ({jadwal['hari']}): ") or jadwal['hari']
-    jadwal['waktu_mulai'] = input(f"Waktu Mulai ({jadwal['waktu_mulai']}): ") or jadwal['waktu_mulai']
-    jadwal['waktu_selesai'] = input(f"Waktu Selesai ({jadwal['waktu_selesai']}): ") or jadwal['waktu_selesai']
-    jadwal['kelas'] = input(f"Kelas ({jadwal['kelas']}): ") or jadwal['kelas']
-    jadwal['kode_mk'] = input(f"Kode Mata Kuliah ({jadwal['kode_mk']}): ") or jadwal['kode_mk']
-    jadwal['nama_mk'] = input(f"Nama Mata Kuliah ({jadwal['nama_mk']}): ") or jadwal['nama_mk']
-    jadwal['sks'] = int(input(f"Jumlah SKS ({jadwal['sks']}): ") or jadwal['sks'])
-    jadwal['dosen'] = input(f"Nama Dosen ({jadwal['dosen']}): ") or jadwal['dosen']
-    jadwal['ruang'] = input(f"Ruang ({jadwal['ruang']}): ") or jadwal['ruang']
-    
-    print("Jadwal berhasil diubah!")
 
-# Fungsi untuk menghapus jadwal berdasarkan ID
-def hapus_jadwal(jadwal_list):
-    jadwal_id = int(input("\nMasukkan ID jadwal yang ingin dihapus: "))
-    jadwal = next((item for item in jadwal_list if item['id'] == jadwal_id), None)
-    
-    if jadwal is None:
-        print("Jadwal dengan ID tersebut tidak ditemukan!")
+    # Menampilkan jadwal yang ada dalam format tabel
+    tampilkan_jadwal(hari, data_jadwal[hari])
+
+    # Meminta input nomor jadwal yang ingin diedit
+    while True:
+        try:
+            nomor = int(input("Masukkan nomor jadwal yang ingin diedit: ")) - 1
+            if 0 <= nomor < len(data_jadwal[hari]):
+                break
+            else:
+                print("Error: Nomor tidak valid. Silakan masukkan lagi.")
+        except ValueError:
+            print("Error: Masukkan angka yang valid.")
+
+    # Meminta input baru untuk jadwal yang dipilih
+    jadwal_edit = data_jadwal[hari][nomor]
+    print("Masukkan data baru (tekan Enter untuk tetap menggunakan data lama):")
+
+    for key in jadwal_edit.keys():
+        new_value = input(f"{key.capitalize()} [{jadwal_edit[key]}]: ").strip()
+        if new_value:
+            if key == "dosen":
+                new_value = [dosen.strip() for dosen in new_value.split(',')]
+            jadwal_edit[key] = new_value
+
+    # Menyimpan data kembali ke file JSON
+    simpan_data(file_path, data_jadwal)
+    print("Jadwal berhasil diedit!")
+
+# Fungsi untuk menghapus jadwal
+def hapus_jadwal(file_path):
+    data_jadwal = baca_data(file_path)
+
+    # Meminta input hari
+    hari = input("Masukkan hari yang ingin dihapus jadwalnya: ").capitalize().strip()
+    if hari not in data_jadwal:
+        print("Error: Hari tidak ditemukan.")
         return
-    
-    jadwal_list.remove(jadwal)
+
+    # Menampilkan jadwal yang ada dalam format tabel
+    tampilkan_jadwal(hari, data_jadwal[hari])
+
+    # Meminta input nomor jadwal yang ingin dihapus
+    while True:
+        try:
+            nomor = int(input("Masukkan nomor jadwal yang ingin dihapus: ")) - 1
+            if 0 <= nomor < len(data_jadwal[hari]):
+                break
+            else:
+                print("Error: Nomor tidak valid. Silakan masukkan lagi.")
+        except ValueError:
+            print("Error: Masukkan angka yang valid.")
+
+    # Menghapus jadwal yang dipilih
+    del data_jadwal[hari][nomor]
+
+    # Menghapus entri hari jika tidak ada jadwal tersisa
+    if not data_jadwal[hari]:
+        del data_jadwal[hari]
+
+    # Menyimpan data kembali ke file JSON
+    simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil dihapus!")
 
-# Menu untuk operasi CRUD
-def menu():
+# Fungsi utama untuk menampilkan menu
+def menu(file_path):
     while True:
-        print("\n=== Menu ===")
+        print("\nMenu:")
         print("1. Tambah Jadwal")
-        print("2. Tampilkan Jadwal")
-        print("3. Update Jadwal")
-        print("4. Hapus Jadwal")
-        print("5. Keluar")
-
-        pilihan = input("Pilih menu: ")
-
-        if pilihan == "1":
-            tambah_jadwal(jadwal_list)
-        elif pilihan == "2":
-            tampilkan_jadwal(jadwal_list)
-        elif pilihan == "3":
-            update_jadwal(jadwal_list)
-        elif pilihan == "4":
-            hapus_jadwal(jadwal_list)
-        elif pilihan == "5":
-            print("Program selesai.")
+        print("2. Edit Jadwal")
+        print("3. Hapus Jadwal")
+        print("4. Keluar")
+        
+        pilihan = input("Pilih tindakan (1-4): ").strip()
+        
+        if pilihan == '1':
+            tambah_jadwal(file_path)
+        elif pilihan == '2':
+            edit_jadwal(file_path)
+        elif pilihan == '3':
+            hapus_jadwal(file_path)
+        elif pilihan == '4':
+            print("Terima kasih! Keluar dari program.")
             break
         else:
-            print("Pilihan tidak valid, coba lagi.")
+            print("Pilihan tidak valid. Harap pilih antara 1- 4.")
 
-# Menjalankan program
-if __name__ == "__main__":
-    menu()
+# Memanggil fungsi menu()
+file_path = 'data_jadwal.json'
+menu(file_path)

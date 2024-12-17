@@ -10,6 +10,17 @@
                 "no_telepon": "20202020220",
                 "email": "zaii@gmail.com"
             }
+        },
+        "user": {
+            "password": "456",
+            "profil": {
+                "nama": "ghhh",
+                "NIM": "hjjjk",
+                "kelas": "ghhjj",
+                "tanggal_lahir": "DD-MM-YYYY",
+                "no_telepon": "09865433267",
+                "email": ""
+            }
         }
     },
     "admin": {
