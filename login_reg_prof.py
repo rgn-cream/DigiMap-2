@@ -229,6 +229,8 @@ def login_pengguna():
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
             print("Anda akan di alihkan ke halaman register")
+            time.sleep(2)
+            os.system("cls")
             register()
             continue
         break 
