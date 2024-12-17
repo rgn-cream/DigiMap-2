@@ -2,7 +2,6 @@ import json
 import os
 import time
 
-# Nama file untuk database JSON
 FILE_DATABASE = "data_login.json"
 
 # Fungsi untuk memuat data dari file JSON
@@ -10,7 +9,7 @@ def muat_data():
     if os.path.exists(FILE_DATABASE):
         with open(FILE_DATABASE, "r") as file:
             return json.load(file)
-    return {"users": {}, "admin": {"username": "admin", "password": "admin123"}}
+    #return {"users": {}, "admin": {"username": "admin", "password": "admin123"}}
 
 # Fungsi untuk menyimpan data ke file JSON
 def simpan_data(data):
@@ -19,16 +18,29 @@ def simpan_data(data):
 
 def validasi_tanggal_lahir(tanggal):
     try:
-        # Pisahkan input
-        hari, bulan, tahun = map(int, tanggal.split("-"))
-
-        # Cek rentang nilai
-        if 1 <= hari <= 31 and 1 <= bulan <= 12 and len(str(tahun)) == 4:
-            return True
+        if not isinstance(tanggal, str):
+            return False
+        if len(tanggal) != 10 or tanggal[2] != "-" or tanggal[5] != "-":
+            return False
+        hari, bulan, tahun = tanggal.split("-")
+        if not (hari.isdigit() and bulan.isdigit() and tahun.isdigit()):
+            return False
+        hari, bulan, tahun = int(hari), int(bulan), int(tahun)
+        if not (1 <= hari <= 31 and 1 <= bulan <= 12 and len(str(tahun)) == 4):
+            return False
+        if bulan in [4, 6, 9, 11] and hari > 30:
+            return False
+        if bulan == 2:
+            if (tahun % 4 == 0 and (tahun % 100 != 0 or tahun % 400 == 0)):
+                if hari > 29:
+                    return False
+            else:
+                if hari > 28:
+                    return False
+        return True
     except:
-        pass  # Abaikan kesalahan jika input tidak sesuai
-    return False
-# Data pengguna (diambil dari file JSON)
+        return False
+
 data_pengguna = muat_data()
 
 # Fungsi untuk menambahkan profil pengguna baru
@@ -37,29 +49,130 @@ def register():
     print("Form Register User DigiMap")
     print("="*70)
 
-    username = input("Masukkan username: ")
-
-    # Memastikan username belum terpakai
-    if username in data_pengguna["users"]:
-        print("Username sudah ada. Silakan pilih username lain.")
-        return
-
-    password = input("Masukkan password: ")
-    nama = input("Masukkan nama: ")
-    NIM = input("Masukkan NIM: ")
-    kelas = input("Masukkan kelas: ")
+    while True:
+        username = input("Masukkan username: ").strip()
+        if username in data_pengguna.get("users", {}):
+            print("Username sudah ada. Silakan masukkan username lain.")
+            continue
+        elif not username:
+            print("Username tidak boleh kosong.")
+            continue
+        elif len(username) > 15:
+            print("Username maksimal terdiri dari 15 karakter.")
+            continue
+        break
 
     while True:
-        tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ")
-        if validasi_tanggal_lahir(tanggal_lahir):
-            break
-        print("Format tanggal lahir tidak valid. Gunakan format DD-MM-YYYY.")
+        password = input("Masukkan password (8 karakter): ").strip()
+        if not password:
+            print("Password tidak boleh kosong.")
+            continue
+        elif len(password) < 8:
+            print("Password harus terdiri dari 8 karakter")
+            continue 
 
-    no_telepon = input("Masukkan no telepon: ")
-    email = input("Masukkan email: ")
+        has_letter = False
+        has_digit = False
+        
+        for char in password:
+            if char.isalpha():
+                has_letter = True
+            elif char.isdigit():
+                has_digit = True
+        
+        if not has_letter or not has_digit:
+            print("Password harus terdiri atas huruf dan angka.")
+            continue
+        
+        break
 
-    # Menyimpan data ke dalam dictionary
-    data_pengguna["users"][username] = {
+    while True:
+        nama = input("Masukkan nama: ").strip()
+        if not nama:
+            print("Nama tidak boleh kosong.")
+            continue
+        elif len(nama) > 20:
+            print("Nama maksimal terdiri dari 20 karakter.")
+            continue
+        elif not all(c.isalpha() or c.isspace() for c in nama):
+            print("Nama harus berupa huruf.")
+            continue
+        break
+
+    while True:
+        NIM = input("Masukkan NIM (7 digit): ").strip()
+        if not NIM:
+            print("NIM tidak boleh kosong.")
+            continue
+        elif not NIM.isdigit() or len(NIM) != 7:
+            print("NIM harus berupa angka 7 digit.")
+            continue
+        elif NIM in data_pengguna.get("NIM", {}):
+            print("NIM sudah terdaftar, pastikan NIM yang Anda masukkan sudah tepat.")
+            continue
+        break
+
+    while True:
+        kelas = input("Masukkan kelas (contoh: RPL 1B): ").strip()
+        if not kelas:
+            print("Kelas tidak boleh kosong.")
+            continue
+        try:
+            bagian = kelas.split()
+            if len(bagian) != 2:
+                raise ValueError
+            program, subkelas = bagian
+            if program.upper() not in ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]:
+                raise ValueError
+            if program.upper() == "RPL" or program.upper() == "TEKKOM":
+                if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C"]:
+                    break
+                else:
+                    raise ValueError
+            else:
+                if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C", "D", "E", "F"]:
+                    break
+                else:
+                    raise ValueError
+        except ValueError:
+            print("Kelas tidak valid. Pastikan format dan program sesuai dengan aturan.")
+            continue
+
+    while True:
+        tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ").strip()
+        if not validasi_tanggal_lahir(tanggal_lahir):
+            print("Format tanggal lahir tidak valid. Gunakan format DD-MM-YYYY.")
+            continue
+        break
+
+    while True:
+        no_telepon = input("Masukkan no telepon (10-13 digit): ").strip()
+        if not no_telepon:
+            print("Nomor telepon tidak boleh kosong.")
+            continue
+        elif not no_telepon.isdigit() or not (10 <= len(no_telepon) <= 13):
+            print("Nomor telepon harus berupa angka dengan panjang 10-13 digit.")
+            continue
+        break
+
+    while True:
+        email = input("Masukkan email (ex:nama@gmail.com/@upi.edu): ").strip()
+        
+        if not email:
+            print("Email tidak boleh kosong.")
+            continue
+        elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
+            continue
+        
+        # Memastikan hanya satu dari dua domain yang ada
+        if email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
+            continue 
+        break
+
+    # Simpan data pengguna
+    data_pengguna.setdefault("users", {})[username] = {
         "password": password,
         "profil": {
             "nama": nama,
@@ -67,14 +180,19 @@ def register():
             "kelas": kelas,
             "tanggal_lahir": tanggal_lahir,
             "no_telepon": no_telepon,
-            "email": email
-        }
+            "email": email,
+        },
     }
-    simpan_data(data_pengguna)  # Simpan data ke file JSON
+    simpan_data(data_pengguna)
 
-    print("="*70)
+    print("=" * 70)
     print("Profil berhasil ditambahkan!")
-    print("="*70)
+    print("=" * 70)
+
+    print("\nAnda akan beralih ke halaman login. Mohon tunggu sebentar...")
+    time.sleep(2)
+    os.system("cls")
+    login_pengguna()
 
 # Fungsi untuk menampilkan data profil pengguna
 def tampilkan_profil(profil):
@@ -86,13 +204,10 @@ def tampilkan_profil(profil):
     print(f"No Telepon: {profil['no_telepon']}")
     print(f"Email: {profil['email']}")
 
-
 # Fungsi login admin
 def login_admin():
     username = input("Masukkan username admin: ")
     password = input("Masukkan password admin: ")
-
-    # Verifikasi login admin
     if username == data_pengguna["admin"]["username"] and password == data_pengguna["admin"]["password"]:
         print("Login Admin berhasil!")
     else:
@@ -105,8 +220,25 @@ def login_pengguna():
     print("="*70)
     print("Selamat Datang Kembali di DigiMap! Silahkan Masukkan Kredensial disini")
     print("-"*70)
-    username = input("Masukkan Username   : ")
-    password = input("Masukkan Password   : ")
+
+    # Load data pengguna dari file JSON
+    data_pengguna = muat_data()
+
+    while True:
+        username = input("Masukkan Username   : ")
+        if username not in data_pengguna["users"]:
+            print("Username tidak tersedia")
+            print("Anda akan di alihkan ke halaman register")
+            register()
+            continue
+        break 
+
+    while True: 
+        password = input("Masukkan Password   : ")
+        if data_pengguna["users"][username]["password"] != password:
+            print("Password anda salah. Pastikan password yang dimasukkan sesuai")
+            continue
+        break
 
     if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
         print("="*70)
@@ -118,30 +250,20 @@ def login_pengguna():
         if tampilan.lower() == "y":
             time.sleep(2)
             os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             tampilkan_profil(data_pengguna["users"][username]["profil"])
+            time.sleep(2)
         elif tampilan.lower() == "n":
             print("Anda akan kembali ke halaman utama")
+            menu_pengguna()
         else:
-            print("Pilihan Anda tidak tersedia")
+            print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
+
         
     else:
         print("="*70)
-        print("Username, NIM, atau Password tidak Valid!")
+        print("Username dan Password tidak Valid!")
         print("="*70)
-    
-        opsi = input("Coba lagi?(Y/N) ")
-        if opsi.lower() == "y":
-            os.system("cls")
-            login_pengguna()
-        elif opsi.lower() == "n":
-            time.sleep(2)
-            print("Anda akan kembali ke halaman utama")
-            #HALAMAN UTAMA
-        else:
-            print("\nMohon maaf pilihan anda tidak tersedia. Anda akan dialihkan ke menu utama")
-            time.sleep(2)
-            os.system("cls")
-            menu_pengguna()
 
 # Fungsi untuk submenu login pengguna
 def menu_pengguna():

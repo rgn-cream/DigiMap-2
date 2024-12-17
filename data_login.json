@@ -21,6 +21,50 @@
                 "no_telepon": "098129819219",
                 "email": "rere@gmailcom"
             }
+        },
+        "reree": {
+            "password": "12345678",
+            "profil": {
+                "nama": "reree",
+                "NIM": "2134321",
+                "kelas": "rpl 1b",
+                "tanggal_lahir": "23-11-2024",
+                "no_telepon": "0998765342",
+                "email": "email@a"
+            }
+        },
+        "siapa": {
+            "password": "regina12",
+            "profil": {
+                "nama": "regina",
+                "NIM": "2406043",
+                "kelas": "rpl 1a",
+                "tanggal_lahir": "26-07-2007",
+                "no_telepon": "082117340622",
+                "email": "regina@gmail.com"
+            }
+        },
+        "aku": {
+            "password": "gabisaaa",
+            "profil": {
+                "nama": "gatau",
+                "NIM": "1234567",
+                "kelas": "pgsd 1b",
+                "tanggal_lahir": "26-09-2004",
+                "no_telepon": "0821789282911",
+                "email": "regina@gmail.com"
+            }
+        },
+        "siapapun": {
+            "password": "asalkan123",
+            "profil": {
+                "nama": "mau",
+                "NIM": "1234567",
+                "kelas": "rpl 1b",
+                "tanggal_lahir": "23-09-1998",
+                "no_telepon": "0892617827381",
+                "email": "regina@upi.edu"
+            }
         }
     },
     "admin": {
