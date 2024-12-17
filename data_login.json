@@ -65,6 +65,17 @@
                 "no_telepon": "0892617827381",
                 "email": "regina@upi.edu"
             }
+        },
+        "payayaya": {
+            "password": "skaapoo444",
+            "profil": {
+                "nama": "namanyasiapa",
+                "NIM": "1234567",
+                "kelas": "rpl 1a",
+                "tanggal_lahir": "23-08-2001",
+                "no_telepon": "0897654261789",
+                "email": "rere@gmail.com"
+            }
         }
     },
     "admin": {
