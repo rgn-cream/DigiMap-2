@@ -1,6 +1,6 @@
 import os, time
-from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna, tampilkan_profil
-
+from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
+from Profil_pengguna import tampilkan_profil, edit_profil
 
 # Fungsi untuk menambahkan profil pengguna baru
 def register():
@@ -200,10 +200,27 @@ def login_pengguna():
         tampilan = input("Y/N: ")
         if tampilan.lower() == "y":
             time.sleep(2)
-            os.system("cls")
             os.system("cls" if os.name == "nt" else "clear")
-            tampilkan_profil(data_pengguna["users"][username]["profil"])
-            time.sleep(2)
+            
+            profil = data_pengguna["users"][username]["profil"]
+            
+            tampilkan_profil(profil)
+            while True:
+                print("\nPilih opsi:")
+                print("1. Edit Profil")
+                print("2. Kembali ke Menu Utama")
+                pilihan = input("Pilih opsi (1/2): ").strip()
+
+                if pilihan == "1":
+                    edit_profil(profil, username)
+                    tampilkan_profil(profil)
+                elif pilihan == "2":
+                    menu_pengguna()
+                    break
+                else:
+                    print("Pilihan tidak valid. Silakan coba lagi.")
+                time.sleep(2)
+
         elif tampilan.lower() == "n":
             print("Anda akan kembali ke halaman utama")
             menu_pengguna()

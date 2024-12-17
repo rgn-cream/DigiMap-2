@@ -40,12 +40,3 @@ def validasi_tanggal_lahir(tanggal):
 
 data_pengguna = muat_data()
 
-# Fungsi untuk menampilkan data profil pengguna
-def tampilkan_profil(profil):
-    print("=== Profil Pengguna ===")
-    print(f"Nama: {profil['nama']}")
-    print(f"NIM: {profil['NIM']}")
-    print(f"Kelas: {profil['kelas']}")
-    print(f"Tanggal Lahir: {profil['tanggal_lahir']}")
-    print(f"No Telepon: {profil['no_telepon']}")
-    print(f"Email: {profil['email']}")
