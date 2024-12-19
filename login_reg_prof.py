@@ -124,7 +124,6 @@ def register():
             print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
             continue
         
-        # Memastikan hanya satu dari dua domain yang ada
         if email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
             continue 
@@ -155,12 +154,53 @@ def register():
 
 # Fungsi login admin
 def login_admin():
-    username = input("Masukkan username admin: ")
-    password = input("Masukkan password admin: ")
-    if username == data_pengguna["admin"]["username"] and password == data_pengguna["admin"]["password"]:
+    print("="*70)
+    print("LOGIN ADMIN")
+    print("="*70)
+
+    data_admin = muat_data()
+    if not data_admin or "admin" not in data_admin:
+        print("Data admin tidak tersedia atau tidak valid.")
+        return
+
+    while True:
+        email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
+        if not email:
+            print("Email tidak boleh kosong.")
+            continue
+        elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
+            continue
+        elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
+            continue
+        break
+
+    while True:
+        password = input("Masukkan password (8 karakter): ").strip()
+        if not password:
+            print("Password tidak boleh kosong.")
+            continue
+        elif len(password) < 8:
+            print("Password harus terdiri dari 8 karakter.")
+            continue
+        break
+
+    if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
         print("Login Admin berhasil!")
-    else:
-        print("Username atau password admin salah.")
+        
+        print("Menu admin (Y/N)")
+        tampilan = input("Y/N: ")
+        if tampilan.lower() == "y":
+            time.sleep(2)
+            os.system("cls" if os.name == "nt" else "clear")
+            #fungsi menu admin
+
+        elif tampilan.lower() == "n":
+            print("Anda akan kembali ke halaman utama")
+            menu_pengguna()
+        else:
+            print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
 
 # Fungsi login pengguna
 def login_pengguna():
@@ -278,11 +318,11 @@ def login_tamu():
 def main():
     while True:
         print("\n" + "=" * 40)
-        print(" Menu Login ")
+        print("Masuk sebagai")
         print("=" * 40)
-        print("1. Login Admin")
-        print("2. Login Pengguna")
-        print("3. Login Tamu")
+        print("1. Admin")
+        print("2. Pengguna")
+        print("3. Tamu")
         print("4. Keluar")
         print("=" * 40)
 
