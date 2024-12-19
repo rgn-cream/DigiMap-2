@@ -13,8 +13,10 @@
         },
 
     },
+    
     "admin": {
-        "username": "admin",
-        "password": "admin123"
+        "email": "reginanf7@gmail.com",
+        "password": "regina12345"
     }
 }
+    
