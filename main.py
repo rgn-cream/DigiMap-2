@@ -1,3 +1,4 @@
+from admin import menu_admin 
 from profil_pengguna import tambah_profil
 from search_jadwal.search import cari_jadwal
 
@@ -5,15 +6,15 @@ current_user = {"username": None}
 
 def tampilkan_menu():
     """Fungsi untuk menampilkan menu utama."""
-    print("\n=== Selamat Datang di DIGIMAP ===")
+    print("\n===== Selamat Datang di DIGIMAP =====")
     print("Silakan pilih menu berikut:")
     print("1. Login")
     print("2. Register")
     print("3. Profil Pengguna")
     print("4. Cari Jadwal Kuliah")
     print("5. Tampilan Map")
-    print("6. Logout")
-    print("7. Keluar")
+    print("6. Menu Admin")
+    print("7. Logout")
 
 def tampilkan_map():
     print("\n--- Tampilan Map ---")
@@ -51,15 +52,17 @@ def main():
         
         elif pilihan == "6":
             if current_user["username"]:
+                menu_admin()  
+            else:
+                print("\n[ERROR] Anda harus login terlebih dahulu untuk mengakses menu ini.")
+        
+        elif pilihan == "7":
+            if current_user["username"]:
                 (current_user)
                 print("\n[INFO] Anda telah logout.")
             else:
                 print("\n[ERROR] Anda belum login.")
-        
-        elif pilihan == "7":
-            print("\nTerima kasih telah menggunakan DIGIMAP. Sampai jumpa!")
-            break
-        
+                
         else:
             print("\n[ERROR] Pilihan tidak valid. Silakan coba lagi!")
 
