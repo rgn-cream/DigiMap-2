@@ -1,6 +1,6 @@
 from admin import menu_admin 
-from profil_pengguna import tambah_profil
-from search_jadwal.search import cari_jadwal
+from profil_pengguna import tampilkan_profil
+from search import cari_jadwal
 
 current_user = {"username": None}
 
@@ -35,7 +35,7 @@ def main():
         elif pilihan == "3":
             if current_user["username"]:
                 print("\n--- Menu Profil Pengguna ---")
-                tambah_profil()
+                tampilkan_profil()
             else:
                 print("\n[ERROR] Anda harus login terlebih dahulu untuk mengakses menu ini.")
         
@@ -140,6 +140,8 @@ import os, time
 from login_reg_prof import login_admin
 from login_reg_prof import menu_pengguna
 from login_reg_prof import login_tamu
+from login_reg_prof import login_pengguna
+from login_reg_prof import register
 
 # Fungsi untuk submenu login pengguna
 def menu_pengguna():

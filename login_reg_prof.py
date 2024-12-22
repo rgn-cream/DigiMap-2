@@ -1,6 +1,6 @@
 import os, time
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from Profil_pengguna import tampilkan_profil, edit_profil
+from profil_pengguna import tampilkan_profil, edit_profil
 
 # Fungsi untuk menambahkan profil pengguna baru
 def register():

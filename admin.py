@@ -205,7 +205,7 @@ def hapus_jadwal(file_path):
     print("Jadwal berhasil dihapus!")
 
 # Fungsi utama untuk menampilkan menu
-def menu(file_path):
+def menu_admin(file_path):
     while True:
         print("\nMenu:")
         print("1. Tambah Jadwal")
@@ -229,4 +229,4 @@ def menu(file_path):
 
 # Memanggil fungsi menu()
 file_path = 'data_jadwal.json'
-menu(file_path)
+menu_admin(file_path)
