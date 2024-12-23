@@ -1547,6 +1547,19 @@
                 "Dr. Kurniawati, S.Pd., M.Pd. "
             ],
             "ruang": ""
+        },
+        {
+            "waktu_mulai": "12:00",
+            "waktu_selesai": "12:50",
+            "jurusan": "PGSD",
+            "kelas": "1B",
+            "kode_mk": "PG34",
+            "nama_mk": "Pendidikan Dsar",
+            "sks": "1",
+            "dosen": [
+                "aku"
+            ],
+            "ruang": "12345de"
         }
     ]
 }

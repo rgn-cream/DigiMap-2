@@ -1,6 +1,6 @@
 from admin import menu_admin 
-from profil_pengguna import tambah_profil
-from search_jadwal.search import cari_jadwal
+from Profil_pengguna import tampilkan_profil
+from search import cari_jadwal
 
 current_user = {"username": None}
 
@@ -35,7 +35,7 @@ def main():
         elif pilihan == "3":
             if current_user["username"]:
                 print("\n--- Menu Profil Pengguna ---")
-                tambah_profil()
+                tampilkan_profil()
             else:
                 print("\n[ERROR] Anda harus login terlebih dahulu untuk mengakses menu ini.")
         
@@ -52,7 +52,7 @@ def main():
         
         elif pilihan == "6":
             if current_user["username"]:
-                menu_admin()  
+                 ()  
             else:
                 print("\n[ERROR] Anda harus login terlebih dahulu untuk mengakses menu ini.")
         
