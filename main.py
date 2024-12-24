@@ -1,4 +1,5 @@
 from admin import menu_admin 
+from Profil_pengguna import tampilkan_profil
 from profil_pengguna import tampilkan_profil
 from search import cari_jadwal
 
@@ -52,7 +53,7 @@ def main():
         
         elif pilihan == "6":
             if current_user["username"]:
-                menu_admin()  
+                 ()  
             else:
                 print("\n[ERROR] Anda harus login terlebih dahulu untuk mengakses menu ini.")
         

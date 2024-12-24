@@ -21,9 +21,15 @@ def tampilkan_jadwal(hari, jadwal):
     print(f"{'No':<4}{'Hari':<12}{'Waktu Mulai':<15}{'Waktu Selesai':<15}{'Jurusan':<12}{'Kelas':<12}{'Kode MK':<10}{'Nama MK':<25}{'SKS':<5}{'Dosen':<40}{'Ruang':<15}")
     print("=" * 160)
     for idx, item in enumerate(jadwal):
-        dosen = ", ".join(item["dosen"]) if isinstance(item["dosen"], list) else item["dosen"]
-        print(f"{idx + 1:<4}{hari:<12}{item['waktu_mulai']:<15}{item['waktu_selesai']:<15}{item['jurusan']:<12}{item['kelas']:<12}{item['kode_mk']:<10}{item['nama_mk']:<25}{item['sks']:<5}{dosen:<40}{item['ruang']:<15}")
+        dosen = ", ".join(item.get("dosen", ['Tidak ada dosen'])) if isinstance(item.get("dosen"), list) else item.get("dosen", 'Tidak ada dosen')
+        jurusan = item.get('jurusan', 'Tidak ada jurusan')  # Menggunakan .get() untuk menghindari KeyError
+        kelas = item.get('kelas', 'Tidak ada kelas')
+        kode_mk = item.get('kode_mk', 'Tidak ada kode MK')
+        nama_mk = item.get('nama_mk', 'Tidak ada nama MK')
+        sks = item.get('sks', '0')  # Menggunakan '0' sebagai default untuk SKS
+        ruang = item.get('ruang', 'Tidak ada ruang')
 
+        print(f"{idx + 1:<4}{hari:<12}{item.get('waktu_mulai', 'Tidak ada waktu mulai'):<15}{item.get('waktu_selesai', 'Tidak ada waktu selesai'):<15}{jurusan:<12}{kelas:<12}{kode_mk:<10}{nama_mk:<25}{sks:<5}{dosen:<40}{ruang:<15}")
 # Fungsi untuk menambahkan jadwal baru
 def tambah_jadwal(file_path):
     data_jadwal = baca_data(file_path)
@@ -39,16 +45,22 @@ def tambah_jadwal(file_path):
     # Meminta input waktu mulai
     while True:
         waktu_mulai = input("Masukkan waktu mulai (misal: 13:00): ").strip()
+        # Memeriksa apakah input valid (format HH:MM)
         if not waktu_mulai:
             print("Error: Waktu mulai tidak boleh kosong. Silakan masukkan lagi.")
+        elif not all(part.isdigit() for part in waktu_mulai.split(':')) or len(waktu_mulai.split(':')) != 2:
+            print("Error: Waktu mulai harus dalam format HH:MM dan hanya boleh mengandung angka. Silakan masukkan lagi.")
         else:
             break
 
     # Meminta input waktu selesai
     while True:
         waktu_selesai = input("Masukkan waktu selesai (misal: 14:40): ").strip()
+        # Memeriksa apakah input valid (format HH:MM)
         if not waktu_selesai:
             print("Error: Waktu selesai tidak boleh kosong. Silakan masukkan lagi.")
+        elif not all(part.isdigit() for part in waktu_selesai.split(':')) or len(waktu_selesai.split(':')) != 2:
+            print("Error: Waktu selesai harus dalam format HH:MM dan hanya boleh mengandung angka. Silakan masukkan lagi.")
         else:
             break
 
@@ -86,12 +98,12 @@ def tambah_jadwal(file_path):
 
     # Meminta input SKS
     while True:
-        sks = input("Masukkan SKS: ").strip()
-        if not sks:
-            print("Error: SKS tidak boleh kosong. Silakan masukkan lagi.")
-        else:
+        sks = input("Masukkan SKS: ")
+        if sks and sks.isdigit():
+            sks_int = int(sks)  # Mengonversi ke integer
             break
-
+        print("Error: SKS tidak boleh kosong dan harus berupa angka bulat (integer). Silakan masukkan lagi.")
+    
     # Meminta input dosen
     while True:
         dosen = input("Masukkan nama dosen (pisahkan dengan koma jika lebih dari satu): ").strip()
