@@ -1,6 +1,7 @@
 import os, time
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from profil_pengguna import tampilkan_profil, edit_profil
+from Profil_pengguna import tampilkan_profil, edit_profil
+from admin import login_admin
 
 # Fungsi untuk menambahkan profil pengguna baru
 def register():
@@ -151,56 +152,6 @@ def register():
     time.sleep(2)
     os.system("cls")
     login_pengguna()
-
-# Fungsi login admin
-def login_admin():
-    print("="*70)
-    print("LOGIN ADMIN")
-    print("="*70)
-
-    data_admin = muat_data()
-    if not data_admin or "admin" not in data_admin:
-        print("Data admin tidak tersedia atau tidak valid.")
-        return
-
-    while True:
-        email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
-        if not email:
-            print("Email tidak boleh kosong.")
-            continue
-        elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
-            print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
-            continue
-        elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
-            print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
-            continue
-        break
-
-    while True:
-        password = input("Masukkan password (8 karakter): ").strip()
-        if not password:
-            print("Password tidak boleh kosong.")
-            continue
-        elif len(password) < 8:
-            print("Password harus terdiri dari 8 karakter.")
-            continue
-        break
-
-    if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
-        print("Login Admin berhasil!")
-        
-        print("Menu admin (Y/N)")
-        tampilan = input("Y/N: ")
-        if tampilan.lower() == "y":
-            time.sleep(2)
-            os.system("cls" if os.name == "nt" else "clear")
-            #fungsi menu admin
-
-        elif tampilan.lower() == "n":
-            print("Anda akan kembali ke halaman utama")
-            menu_pengguna()
-        else:
-            print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
 
 # Fungsi login pengguna
 def login_pengguna():

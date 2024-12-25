@@ -1,6 +1,6 @@
 from admin import menu_admin 
 from Profil_pengguna import tampilkan_profil
-from profil_pengguna import tampilkan_profil
+from Profil_pengguna import tampilkan_profil
 from search import cari_jadwal
 
 current_user = {"username": None}
