@@ -3,32 +3,53 @@ import json
 def cari_jadwal(jadwal):
     print("\n==========Pencarian Jadwal Kelas==========")
 
-   # Meminta input hari
+ # Daftar hari yang valid
+    hari_valid = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
+
     while True:
-        hari = input("\nMasukkan hari: ").capitalize().strip()
+        hari = input("Masukkan hari (misal: Senin, Selasa, dst.): ").capitalize().strip()
+        
+        # Validasi input
         if not hari:
             print("Error: Hari tidak boleh kosong. Silakan masukkan lagi.")
+        elif hari not in hari_valid:
+            print("Error: Hari tidak valid. Harap masukkan salah satu hari dari Senin hingga Jumat.")
         else:
-            break  # Keluar dari loop jika input valid
+            break
+
+    # Daftar jurusan yang valid
+    jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
 
     # Meminta input jurusan
     while True:
         jurusan = input("\nMasukkan jurusan: ").upper().strip()
+        
+        # Validasi input
         if not jurusan:
             print("Error: Jurusan tidak boleh kosong. Silakan masukkan lagi.")
+        elif jurusan not in jurusan_valid:
+            print("Error: Jurusan tidak valid. Harap masukkan salah satu dari: RPL, TEKKOM, PGPAUD, PGSD, PMM.")
         else:
-            break  # Keluar dari loop jika input valid
+            break 
+
+    # Daftar kelas valid
+    kelas_valid = ["A", "B", "C", "D", "E", "F"]
 
     # Meminta input kelas
     while True:
-        kelas = input("\nMasukkan kelas: ").upper().strip()
+        kelas = input("\nMasukkan kelas (contoh: 1B): ").upper().strip()
+
+        # Validasi input
         if not kelas:
-            print("Error: Kelas tidak boleh kosong. Silakan masukkan lagi.")
+            print("Error: Kelas tidak boleh kosong.")
+        elif len(kelas) != 2 or not kelas[0].isdigit() or kelas[1] not in kelas_valid:
+            print("Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B).")
         else:
-            break  # Keluar dari loop jika input valid
+            break 
 
     hasil = []
     for hari_kuliah, jadwal_harian in jadwal.items():
+        # Filter berdasarkan hari
         if hari and hari_kuliah != hari:
             continue
         for mata_kuliah in jadwal_harian:
@@ -53,7 +74,7 @@ def cari_jadwal(jadwal):
                 "ruang": mata_kuliah["ruang"]
             })
 
-# Tampilkan hasil
+    # Tampilkan hasil
     print("")
     if hasil:
         # Header tabel
