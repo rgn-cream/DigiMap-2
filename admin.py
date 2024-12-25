@@ -1,4 +1,47 @@
-import json
+import json, os, time
+from fungsi import muat_data 
+
+def login_admin():
+    print("="*70)
+    print("LOGIN ADMIN")
+    print("="*70)
+    
+    data_admin = muat_data()
+    while True:
+        email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
+        if email != data_admin["admin"].get("email"):
+            print("Email tidak valid, periksa kembali email yang dimasukkan.")
+            return
+        elif not email:
+            print("Email tidak boleh kosong.")
+            continue
+        elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
+            continue
+        elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
+            print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
+            continue
+        break
+
+    while True:
+        password = input("Masukkan password (8 karakter): ").strip()
+        if not password:
+            print("Password tidak boleh kosong.")
+            continue
+        elif len(password) < 8:
+            print("Password harus terdiri dari 8 karakter.")
+            continue
+        break
+
+    if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
+        print("Login Admin berhasil!")
+        print("Anda akan memasuki menu admin. Mohon tunggu sebentar...")
+        os.system("cls")
+        time.sleep(2)
+        file_path = 'data_jadwal.json'
+        menu_admin(file_path)
+    else: 
+        print("Username dan password tidak valid!")
 
 # Fungsi untuk membaca data dari file JSON
 def baca_data(file_path):
@@ -218,6 +261,7 @@ def hapus_jadwal(file_path):
 
 # Fungsi utama untuk menampilkan menu
 def menu_admin(file_path):
+    file_path = 'data_jadwal.json'
     while True:
         print("\nMenu:")
         print("1. Tambah Jadwal")
@@ -238,7 +282,6 @@ def menu_admin(file_path):
             break
         else:
             print("Pilihan tidak valid. Harap pilih antara 1- 4.")
+    
 
 # Memanggil fungsi menu()
-file_path = 'data_jadwal.json'
-menu_admin(file_path)

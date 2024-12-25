@@ -1,7 +1,10 @@
 import os, time
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from profil_pengguna import tampilkan_profil, edit_profil
+from Profil_pengguna import tampilkan_profil, edit_profil
+from admin import login_admin
+from search import cari_jadwal
 
+#PENGGUNA====================================================================================================================================================================================
 # Fungsi untuk menambahkan profil pengguna baru
 def register():
     print("="*70)
@@ -152,56 +155,6 @@ def register():
     os.system("cls")
     login_pengguna()
 
-# Fungsi login admin
-def login_admin():
-    print("="*70)
-    print("LOGIN ADMIN")
-    print("="*70)
-
-    data_admin = muat_data()
-    if not data_admin or "admin" not in data_admin:
-        print("Data admin tidak tersedia atau tidak valid.")
-        return
-
-    while True:
-        email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
-        if not email:
-            print("Email tidak boleh kosong.")
-            continue
-        elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
-            print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
-            continue
-        elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
-            print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
-            continue
-        break
-
-    while True:
-        password = input("Masukkan password (8 karakter): ").strip()
-        if not password:
-            print("Password tidak boleh kosong.")
-            continue
-        elif len(password) < 8:
-            print("Password harus terdiri dari 8 karakter.")
-            continue
-        break
-
-    if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
-        print("Login Admin berhasil!")
-        
-        print("Menu admin (Y/N)")
-        tampilan = input("Y/N: ")
-        if tampilan.lower() == "y":
-            time.sleep(2)
-            os.system("cls" if os.name == "nt" else "clear")
-            #fungsi menu admin
-
-        elif tampilan.lower() == "n":
-            print("Anda akan kembali ke halaman utama")
-            menu_pengguna()
-        else:
-            print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
-
 # Fungsi login pengguna
 def login_pengguna():
     print("="*70)
@@ -255,7 +208,7 @@ def login_pengguna():
                     edit_profil(profil, username)
                     tampilkan_profil(profil)
                 elif pilihan == "2":
-                    menu_pengguna()
+                    menu_login_pengguna()
                     break
                 else:
                     print("Pilihan tidak valid. Silakan coba lagi.")
@@ -263,7 +216,7 @@ def login_pengguna():
 
         elif tampilan.lower() == "n":
             print("Anda akan kembali ke halaman utama")
-            menu_pengguna()
+            menu_login_pengguna()
         else:
             print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
 
@@ -281,12 +234,14 @@ def logout():
     main()
 
 # Fungsi untuk submenu login pengguna
-def menu_pengguna():
+def menu_login_pengguna():
     while True:
-        print("\n=== Menu Pengguna ===")
+        print("\n")
+        print("="*70)
+        print("Menu Login Pengguna")
+        print("="*70)
         print("1. Login")
         print("2. Sign Up / Register")
-        print("3. Logout")
         pilihan = input("Pilih opsi (1/2/3): ")
 
         if pilihan == "1":
@@ -303,18 +258,77 @@ def menu_pengguna():
             time.sleep(2)
             break
         elif pilihan == "3":
-            logout()
+            login_tamu()
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi.")
 
-# Fungsi login tamu
-def login_tamu():
-    print("=== Login Tamu ===")
-    print("Halo, Tamu! Anda login sebagai pengguna tanpa profil.")
-    print("Sebagai tamu, anda tidak dapat melihat jadwal penggunaan kelas")
+def menu_pengguna():
+    print("===Menu Pengguna===")
+    print("1. Lihat Map")
+    print("2. Cari Jadwal Kelas")
+    print("3. Lihat Profil")
+    print("4. Logout")
 
-# Menu utama
+    opsi = int(input("Pilih opsi (1/2/3/4): "))
+    if opsi == 1: 
+        print("Denah upi cibiru")
+    elif opsi == 2:
+        cari_jadwal()
+    elif opsi == 3:
+        tampilkan_profil()
+    elif opsi == 4:
+        logout()
+    else: 
+        print("Pilihan tidak valid. Pastikan memilih (1/2/3/4)")
+
+#TAMU=============================================================================================================================================================================================
+def login_tamu():
+    print("="*70)
+    print("Tamu")
+    print("="*70)
+    print("Halo, Tamu! Anda login sebagai pengguna tanpa profil.")
+    menu_tamu()
+
+def masuk_tamu():
+    print("\n")
+    print("-"*70)
+    print("Apakah anda ingin melakukan melakukan login atau register?")
+    print("-"*70)
+    pilihan = input("Pilih opsi (Y/N): ")
+    if pilihan.lower() == "y":
+        menu_login_pengguna()
+    if pilihan.lower() == "n":
+        print("Anda akan kembali ke menu")
+        time.sleep(2)
+        os.system("cls")
+        menu_tamu()
+
+def menu_tamu():
+    print("\n")
+    print("-"*70)
+    print("Menu tamu")
+    print("-"*70)
+    print("1. Lihat Map")
+    print("2. Cari Jadwal Kelas")
+    print("3. Lihat Profil")
+
+    opsi = int(input("Pilih opsi (1/2/3/4): "))
+    if opsi == 1: 
+        print("Denah upi cibiru")
+        menu_tamu()
+    elif opsi == 2:
+        print("\nAnda tidak dapat melihat jadwal. Silahkan melakukan login terlebih dahulu")
+        masuk_tamu()
+    elif opsi == 3:
+        print("Profil tidak tersedia")
+        masuk_tamu()
+    elif opsi == 4:
+        logout()
+    else: 
+        print("Pilihan tidak valid. Pastikan memilih (1/2/3/4)")
+
+# Menu utama=====================================================================================================================================================================================
 def main():
     while True:
         print("\n" + "=" * 40)
@@ -337,13 +351,12 @@ def main():
             print("Anda akan dialihkan ke menu pengguna, mohon tunggu sebentar")
             time.sleep(2)
             os.system("cls")
-            menu_pengguna()
+            menu_login_pengguna()
         elif pilihan == "3":
             print("Anda akan masuk sebagai tamu")
             time.sleep(2)
             os.system("cls")
             login_tamu()
-            time.sleep(2)
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break
