@@ -170,10 +170,14 @@ def login_pengguna():
         username = input("Masukkan Username   : ")
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
-            print("Anda akan di alihkan ke halaman register")
-            time.sleep(2)
-            os.system("cls")
-            register()
+            opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): "))
+            if opsiRegister.lower == "y":
+                print("Anda akan di alihkan ke halaman register")
+                time.sleep(2)
+                os.system("cls")
+                register()
+            else:
+                login_pengguna2()
             continue
         break 
 
@@ -187,6 +191,10 @@ def login_pengguna():
     if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
         print("="*70)
         print("Login Berhasil!")
+        print("="*70)
+    else:
+        print("="*70)
+        print("Username dan Password tidak Valid!")
         print("="*70)
         
         print("Tampilkan Profil Anda (Y/N)")
@@ -222,11 +230,8 @@ def login_pengguna():
         else:
             print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
 
-        
-    else:
-        print("="*70)
-        print("Username dan Password tidak Valid!")
-        print("="*70)
+def login_pengguna2():
+    login_pengguna()
 
 def logout():
     print("\nAnda akan logout dari sesi saat ini...")
