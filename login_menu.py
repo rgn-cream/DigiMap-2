@@ -171,15 +171,17 @@ def login_pengguna():
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
             opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): "))
-            if opsiRegister.lower == "y":
+            if opsiRegister.lower() == "y":
                 print("Anda akan di alihkan ke halaman register")
                 time.sleep(2)
                 os.system("cls")
                 register()
-            else:
+            elif opsiRegister.lower == "n":
                 login_pengguna2()
+            else:
+                print("Opsi tidak ditemukan, silakan ulangi")
             continue
-        break 
+        break
 
     while True: 
         password = input("Masukkan Password   : ")
@@ -221,7 +223,6 @@ def login_pengguna():
                 else:
                     print("Pilihan tidak valid. Silakan coba lagi.")
                 time.sleep(2)
-
         elif tampilan.lower() == "n":
             print("Anda akan dialihkan ke halaman menu utama")
             time.sleep(2)
