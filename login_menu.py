@@ -1,6 +1,6 @@
 import os, time, json
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from profil_pengguna import tampilkan_profil, edit_profil
+from Profil_pengguna import tampilkan_profil, edit_profil
 from admin import login_admin
 from search import cari_jadwal
 from denah import tampilkan_denah
