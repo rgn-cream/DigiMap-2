@@ -404,47 +404,6 @@
                 "Dian Rinjani, S.Pd., M.Pd."
             ],
             "ruang": "20.4B.04.001"
-        },
-        {
-            "waktu_mulai": "08:40",
-            "waktu_selesai": "10:20",
-            "jurusan": "PMM",
-            "kelas": "1C",
-            "kode_mk": "KU100",
-            "nama_mk": "Pendidikan Agama Islam",
-            "sks": 2,
-            "dosen": [
-                "Asep Rudi Nurjaman, M.Pd"
-            ],
-            "ruang": "20.4B.02.007"
-        },
-        {
-            "waktu_mulai": "13:00",
-            "waktu_selesai": "14:40",
-            "jurusan": "PMM",
-            "kelas": "1C",
-            "kode_mk": "KU100",
-            "nama_mk": "Pendidikan Pancasila",
-            "sks": 2,
-            "dosen": [
-                "Yayang Furi Furnamasari, M.Pd."
-            ],
-            "ruang": "20.4B.02.007"
-        },
-        {
-            "waktu_mulai": "12.00",
-            "waktu_selesai": "13.00",
-            "jurusan": "RPL",
-            "kelas": "1D",
-            "kode_mk": "RL24",
-            "nama_mk": "Pengantar RPL",
-            "sks": "4",
-            "dosen": [
-                "Dian Anggraini",
-                "S.ST.",
-                "M.T."
-            ],
-            "ruang": "20.4B.02.006"
         }
     ],
     "Selasa": [
@@ -1547,6 +1506,19 @@
                 "Dr. Kurniawati, S.Pd., M.Pd. "
             ],
             "ruang": ""
+        },
+        {
+            "waktu_mulai": "12:00",
+            "waktu_selesai": "12:50",
+            "jurusan": "PGSD",
+            "kelas": "1B",
+            "kode_mk": "PG34",
+            "nama_mk": "Pendidikan Dsar",
+            "sks": "1",
+            "dosen": [
+                "aku"
+            ],
+            "ruang": "12345de"
         }
     ]
 }
