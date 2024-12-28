@@ -380,6 +380,16 @@ def hapus_jadwal(file_path):
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil dihapus!")
 
+    pilihan = input("Apakah anda ingin kembali ke menu utama?(y/n): ")
+    while True:
+        if pilihan == "y":
+            menu_admin()
+        elif pilihan == "n":
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+            time.sleep(2)
+
 # Fungsi utama untuk menampilkan menu
 def menu_admin(file_path):
     file_path = 'data_jadwal.json'
