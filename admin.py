@@ -1,6 +1,9 @@
 import json, os, time
 from fungsi import muat_data 
 
+def ulangiLoginAdmin():
+    login_admin()
+
 def login_admin():
     print("="*70)
     print("LOGIN ADMIN")
@@ -11,15 +14,30 @@ def login_admin():
         email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
         if email != data_admin["admin"].get("email"):
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
+            time.sleep(2)
+            os.system("cls")
+            ulangiLoginAdmin()
             return
         elif not email:
             print("Email tidak boleh kosong.")
+            print("Email tidak valid, periksa kembali email yang dimasukkan.")
+            time.sleep(2)
+            os.system("cls")
+            ulangiLoginAdmin()
             continue
         elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
+            print("Email tidak valid, periksa kembali email yang dimasukkan.")
+            time.sleep(2)
+            os.system("cls")
+            ulangiLoginAdmin()
             continue
         elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
+            print("Email tidak valid, periksa kembali email yang dimasukkan.")
+            time.sleep(2)
+            os.system("cls")
+            ulangiLoginAdmin()
             continue
         break
 
