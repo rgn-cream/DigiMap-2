@@ -325,14 +325,14 @@ def masuk_tamu():
 
 def menu_tamu():
     print("\n")
-    print("-"*70)
+    print("="*70)
     print("Menu tamu")
-    print("-"*70)
+    print("="*70)
     print("1. Lihat Denah")
     print("2. Cari Jadwal Kelas")
     print("3. Lihat Profil")
 
-    opsi = int(input("Pilih opsi (1/2/3/4): "))
+    opsi = int(input("Pilih opsi (1/2/3): "))
     if opsi == 1: 
         print("Denah UPI Cibiru")
         tampilkan_denah()
