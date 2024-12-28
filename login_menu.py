@@ -1,6 +1,6 @@
 import os, time, json
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from profil_pengguna import tampilkan_profil, edit_profil
+from Profil_pengguna import tampilkan_profil, edit_profil
 from admin import login_admin
 from search import cari_jadwal
 from denah import tampilkan_denah
@@ -170,12 +170,18 @@ def login_pengguna():
         username = input("Masukkan Username   : ")
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
-            print("Anda akan di alihkan ke halaman register")
-            time.sleep(2)
-            os.system("cls")
-            register()
+            opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): "))
+            if opsiRegister.lower() == "y":
+                print("Anda akan di alihkan ke halaman register")
+                time.sleep(2)
+                os.system("cls")
+                register()
+            elif opsiRegister.lower == "n":
+                login_pengguna2()
+            else:
+                print("Opsi tidak ditemukan, silakan ulangi")
             continue
-        break 
+        break
 
     while True: 
         password = input("Masukkan Password   : ")
@@ -187,6 +193,10 @@ def login_pengguna():
     if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
         print("="*70)
         print("Login Berhasil!")
+        print("="*70)
+    else:
+        print("="*70)
+        print("Username dan Password tidak Valid!")
         print("="*70)
         
         print("Tampilkan Profil Anda (Y/N)")
@@ -213,7 +223,6 @@ def login_pengguna():
                 else:
                     print("Pilihan tidak valid. Silakan coba lagi.")
                 time.sleep(2)
-
         elif tampilan.lower() == "n":
             print("Anda akan dialihkan ke halaman menu utama")
             time.sleep(2)
@@ -222,11 +231,8 @@ def login_pengguna():
         else:
             print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
 
-        
-    else:
-        print("="*70)
-        print("Username dan Password tidak Valid!")
-        print("="*70)
+def login_pengguna2():
+    login_pengguna()
 
 def logout():
     print("\nAnda akan logout dari sesi saat ini...")
@@ -319,14 +325,14 @@ def masuk_tamu():
 
 def menu_tamu():
     print("\n")
-    print("-"*70)
+    print("="*70)
     print("Menu tamu")
-    print("-"*70)
+    print("="*70)
     print("1. Lihat Denah")
     print("2. Cari Jadwal Kelas")
     print("3. Lihat Profil")
 
-    opsi = int(input("Pilih opsi (1/2/3/4): "))
+    opsi = int(input("Pilih opsi (1/2/3): "))
     if opsi == 1: 
         print("Denah UPI Cibiru")
         tampilkan_denah()
