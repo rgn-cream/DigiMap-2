@@ -276,9 +276,8 @@ def load_jadwal_from_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
 
+
 def menu_pengguna():
-    username = data_pengguna.get("username")
-    profil = data_pengguna["users"][username]["profil"]
     while True:
         print("\n"+"="*70)
         print("Menu Pengguna")
@@ -303,9 +302,40 @@ def menu_pengguna():
             jadwal = load_jadwal_from_json('data_jadwal.json')  
             cari_jadwal(jadwal)  
         elif opsi == 3:
-            os.system("cls")
             time.sleep(1)
-            tampilkan_profil(profil)    
+            os.system("cls")
+            print("-"*40)
+            print("Konfirmasi Identitas")
+            print("-"*40)
+            username = input("Masukan username: ")
+            if username in data_pengguna["users"]:
+                profil = data_pengguna["users"][username]["profil"]
+
+                time.sleep(1)
+                os.system("cls")
+                tampilkan_profil(profil)   
+                while True:
+                    print("\n"+"="*70)
+                    print("Pilih opsi:")
+                    print("1. Edit Profil")
+                    print("2. Menu pengguna")
+                    pilihan = input("Pilih opsi (1/2): ").strip()
+
+                    if pilihan == "1":
+                        edit_profil(profil, username)
+                        tampilkan_profil(profil)
+                    elif pilihan == "2":
+                        os.system("cls")
+                        time.sleep(2)
+                        menu_pengguna()
+                        break
+                    else:
+                        print("Pilihan tidak valid. Silakan coba lagi.")
+                    time.sleep(2) 
+            else:
+                print("Profil tidak ditemukan. Silakan login kembali.") 
+                menu_login_pengguna()  
+        
         elif opsi == 4:
             logout()
             break
