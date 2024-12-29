@@ -10,13 +10,21 @@
                 "no_telepon": "20202020220",
                 "email": "zaii@gmail.com"
             }
+        },
+        "tubes": {
+            "password": "tubesyummy24",
+            "profil": {
+                "nama": "digimap",
+                "NIM": "2406043",
+                "kelas": "rpl 1b",
+                "tanggal_lahir": "26-07-2024",
+                "no_telepon": "0891234567890",
+                "email": "digimap@upi.edu"
+            }
         }
-
     },
-    
     "admin": {
         "email": "reginanf7@gmail.com",
         "password": "regina12345"
     }
 }
-    

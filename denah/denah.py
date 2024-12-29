@@ -39,10 +39,6 @@ folium.Marker(location=[-6.94017260869488, 107.72448379263692],
                   <h5>Deskripsi Kantin</h5>
                   """, max_width=500)).add_to(upi_cibiru)
 
-#%%
-upi_cibiru.save('upi_cibiru.html')
-#upi_cibiru
-
 # %%
 # Pos Keamanan
 folium.Marker(location=[-6.940211120237557, 107.72558568149186],
@@ -128,3 +124,7 @@ folium.Marker(location=[-6.940291032506306, 107.72442258464262],
                   """, max_width=500)).add_to(upi_cibiru)
 
 #%%
+#%%
+upi_cibiru.save('upi_cibiru.html')
+#upi_cibiru
+# %%
