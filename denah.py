@@ -41,10 +41,6 @@ def tampilkan_denah():
                     <h5>Deskripsi Kantin</h5>
                     """, max_width=500)).add_to(upi_cibiru)
 
-    #%%
-    upi_cibiru.save('upi_cibiru.html')
-    #upi_cibiru
-
     # %%
     # Pos Keamanan
     folium.Marker(location=[-6.940211120237557, 107.72558568149186],
@@ -128,5 +124,7 @@ def tampilkan_denah():
                     </h4>
                     <h5>Deskripsi Pos Keamanan 2</h5>
                     """, max_width=500)).add_to(upi_cibiru)
-
-#%%
+    
+ #%%
+    upi_cibiru.save('upi_cibiru.html')
+    #upi_cibiru
