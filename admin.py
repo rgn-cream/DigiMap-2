@@ -94,6 +94,9 @@ def tampilkan_jadwal(hari, jadwal):
 
 # Fungsi untuk menambahkan jadwal baru
 def tambah_jadwal(file_path):
+    print("="*70)
+    print("Tambah Jadwal")
+    print("="*70)
     data_jadwal = baca_data(file_path)
 
     # Daftar hari yang valid
@@ -137,7 +140,7 @@ def tambah_jadwal(file_path):
 
     # Meminta input jurusan
     while True:
-        jurusan = input("\nMasukkan jurusan (contoh: RPL): ").upper().strip()
+        jurusan = input("Masukkan jurusan (contoh: RPL): ").upper().strip()
         
         # Validasi input
         if not jurusan:
@@ -152,7 +155,7 @@ def tambah_jadwal(file_path):
 
     # Meminta input kelas
     while True:
-        kelas = input("\nMasukkan kelas (contoh: 1B): ").upper().strip()
+        kelas = input("Masukkan kelas (contoh: 1B): ").upper().strip()
 
         # Validasi input
         if not kelas:
@@ -242,6 +245,10 @@ def tambah_jadwal(file_path):
 
 # Fungsi untuk mengedit jadwal
 def edit_jadwal(file_path):
+    print("="*70)
+    print("Edit Jadwal")
+    print("="*70)
+
     data_jadwal = baca_data(file_path)
 
     # Meminta input hari
@@ -394,21 +401,31 @@ def hapus_jadwal(file_path):
 def menu_admin(file_path):
     file_path = 'data_jadwal.json'
     while True:
-        print("\nMenu:")
+        print("="*70)
+        print("Menu:")
+        print("="*70)
         print("1. Tambah Jadwal")
         print("2. Edit Jadwal")
         print("3. Hapus Jadwal")
         print("4. Keluar")
         
-        pilihan = input("Pilih tindakan (1-4): ").strip()
+        pilihan = input("Pilih tindakan (1/2/3/4): ").strip()
         
         if pilihan == '1':
+            os.file("cls")
+            time.sleep(2)
             tambah_jadwal(file_path)
         elif pilihan == '2':
+            os.file("cls")
+            time.sleep(2)
             edit_jadwal(file_path)
         elif pilihan == '3':
+            os.file("cls")
+            time.sleep(2)
             hapus_jadwal(file_path)
         elif pilihan == '4':
+            os.file("cls")
+            time.sleep(2)
             print("Terima kasih! Keluar dari program.")
             break
         else:

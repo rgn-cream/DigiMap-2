@@ -127,3 +127,4 @@ folium.Marker(location=[-6.940291032506306, 107.72442258464262],
 #%%
 upi_cibiru.save('upi_cibiru.html')
 #upi_cibiru
+# %%

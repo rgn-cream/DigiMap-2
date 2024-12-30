@@ -4,6 +4,7 @@ import folium
 def tampilkan_denah():
     upi_cibiru = folium.Map(location = [-6.939787174459237, 107.72529789772535],
                             zoom_start = 20)
+    
     #%%
     #gedung biru
     folium.Marker(location=[-6.9399425152555585, 107.72534900869695],
