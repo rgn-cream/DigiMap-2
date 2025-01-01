@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_48195bfebb2a4c09e3f93ea7ef2f3aee {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_48195bfebb2a4c09e3f93ea7ef2f3aee" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_48195bfebb2a4c09e3f93ea7ef2f3aee = L.map(
+                "map_48195bfebb2a4c09e3f93ea7ef2f3aee",
+                {
+                    center: [-6.939787174459237, 107.72529789772535],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 20,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_fa69340477c292f9975dc5a59f9f84de = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_fa69340477c292f9975dc5a59f9f84de.addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+            var marker_b086b8cacba6dd98a6d0c5d698222c7d = L.marker(
+                [-6.9399425152555585, 107.72534900869695],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_cc5fac40b45376cad1d9078e2c82d71d = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_76ad84ba1cc0529f1c5b5b5dfc89294d = $(`<div id="html_76ad84ba1cc0529f1c5b5b5dfc89294d" style="width: 100.0%; height: 100.0%;">                   <img src="source image gedung biru" alt="Gedung Biru" style="max-width:100%;max-height:100%">                   <h4>Gedung Biru</br>                   </h4>                   <h5>Deskripsi Gedung Biru</h5>                   </div>`)[0];
+                popup_cc5fac40b45376cad1d9078e2c82d71d.setContent(html_76ad84ba1cc0529f1c5b5b5dfc89294d);
+            
+        
+
+        marker_b086b8cacba6dd98a6d0c5d698222c7d.bindPopup(popup_cc5fac40b45376cad1d9078e2c82d71d)
+        ;
+
+        
+    
+    
+            marker_b086b8cacba6dd98a6d0c5d698222c7d.bindTooltip(
+                `<div>
+                     Gedung Biru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_cc36acb667a8e8336ad4697263ecefc5 = L.marker(
+                [-6.9398935470527565, 107.72505349878351],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_db2a869ff84256e241d73cdeda3a752b = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_992b82a7087cf14392355d100cd58224 = $(`<div id="html_992b82a7087cf14392355d100cd58224" style="width: 100.0%; height: 100.0%;">                   <img src="source image gedung b" alt="Gedung B" style="max-width:100%;max-height:100%">                   <h4>Gedung B</br>                   </h4>                   <h5>Deskripsi Gedung B</h5>                   </div>`)[0];
+                popup_db2a869ff84256e241d73cdeda3a752b.setContent(html_992b82a7087cf14392355d100cd58224);
+            
+        
+
+        marker_cc36acb667a8e8336ad4697263ecefc5.bindPopup(popup_db2a869ff84256e241d73cdeda3a752b)
+        ;
+
+        
+    
+    
+            marker_cc36acb667a8e8336ad4697263ecefc5.bindTooltip(
+                `<div>
+                     Gedung B
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_abd7680cd5d973b0519121318cf19385 = L.marker(
+                [-6.94017260869488, 107.72448379263692],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_6f44e9bc5d1a9404f04b2b17ce27becf = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_c8cc16aca2d215bc83b25e11a871aa5e = $(`<div id="html_c8cc16aca2d215bc83b25e11a871aa5e" style="width: 100.0%; height: 100.0%;">                   <img src="source image Kantin" alt="Kantin" style="max-width:100%;max-height:100%">                   <h4>Kantin</br>                   </h4>                   <h5>Deskripsi Kantin</h5>                   </div>`)[0];
+                popup_6f44e9bc5d1a9404f04b2b17ce27becf.setContent(html_c8cc16aca2d215bc83b25e11a871aa5e);
+            
+        
+
+        marker_abd7680cd5d973b0519121318cf19385.bindPopup(popup_6f44e9bc5d1a9404f04b2b17ce27becf)
+        ;
+
+        
+    
+    
+            marker_abd7680cd5d973b0519121318cf19385.bindTooltip(
+                `<div>
+                     Kantin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_95c5d4855134454ddaf52cd81a825a20 = L.marker(
+                [-6.940211120237557, 107.72558568149186],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_367a1ef36bf5bffc52a086e70457fa3d = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_9a8cc3d6f1e811a4365a584caf3fd7b6 = $(`<div id="html_9a8cc3d6f1e811a4365a584caf3fd7b6" style="width: 100.0%; height: 100.0%;">                   <img src="source image Pos Keamanan 1" alt="Pos Keamanan" style="max-width:100%;max-height:100%">                   <h4>Pos Keamanan</br>                   </h4>                   <h5>Deskripsi Pos Keamanan</h5>                   </div>`)[0];
+                popup_367a1ef36bf5bffc52a086e70457fa3d.setContent(html_9a8cc3d6f1e811a4365a584caf3fd7b6);
+            
+        
+
+        marker_95c5d4855134454ddaf52cd81a825a20.bindPopup(popup_367a1ef36bf5bffc52a086e70457fa3d)
+        ;
+
+        
+    
+    
+            marker_95c5d4855134454ddaf52cd81a825a20.bindTooltip(
+                `<div>
+                     Pos Keamanan 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_693553a16a6c905600470b5aa666da8f = L.marker(
+                [-6.93955247781857, 107.72451172048002],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_649170999c44c5bf8aceb19d87fbeec2 = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_dcfcbcc9c002934b223e5f42173d2881 = $(`<div id="html_dcfcbcc9c002934b223e5f42173d2881" style="width: 100.0%; height: 100.0%;">                   <img src="source image Lab PGSD dan PGPAUD" alt="Lab PGSD dan PGPAUD" style="max-width:100%;max-height:100%">                   <h4>Lab PGSD dan PGPAUD</br>                   </h4>                   <h5>Deskripsi Lab PGSD dan PGPAUD</h5>                   </div>`)[0];
+                popup_649170999c44c5bf8aceb19d87fbeec2.setContent(html_dcfcbcc9c002934b223e5f42173d2881);
+            
+        
+
+        marker_693553a16a6c905600470b5aa666da8f.bindPopup(popup_649170999c44c5bf8aceb19d87fbeec2)
+        ;
+
+        
+    
+    
+            marker_693553a16a6c905600470b5aa666da8f.bindTooltip(
+                `<div>
+                     Lab PGSD dan PGPAUD
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_aeaded6321484de57de49bd967b7f389 = L.marker(
+                [-6.939950775139731, 107.72441210966787],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_04f948b77651df6c76d8dd1cb4159d31 = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_06c44a93e6bad552c3239cbeb589d34b = $(`<div id="html_06c44a93e6bad552c3239cbeb589d34b" style="width: 100.0%; height: 100.0%;">                   <img src="source image Lapangan Olahraga" alt="Lapangan Olahraga" style="max-width:100%;max-height:100%">                   <h4>Lapangan Olahraga</br>                   </h4>                   <h5>Deskripsi Lapangan Olahraga</h5>                   </div>`)[0];
+                popup_04f948b77651df6c76d8dd1cb4159d31.setContent(html_06c44a93e6bad552c3239cbeb589d34b);
+            
+        
+
+        marker_aeaded6321484de57de49bd967b7f389.bindPopup(popup_04f948b77651df6c76d8dd1cb4159d31)
+        ;
+
+        
+    
+    
+            marker_aeaded6321484de57de49bd967b7f389.bindTooltip(
+                `<div>
+                     Lapangan Olahraga
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_1a0ee729d9a805c631dd81d30b194ee4 = L.marker(
+                [-6.9394995951485905, 107.72562940552577],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_ab67ff6671bf79fe6acd7b47964b8051 = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_ded5369f59f52f7a1089910b9c4f3fab = $(`<div id="html_ded5369f59f52f7a1089910b9c4f3fab" style="width: 100.0%; height: 100.0%;">                   <img src="source image Teater Terbuka" alt="Teater Terbuka" style="max-width:100%;max-height:100%">                   <h4>Teater Terbuka</br>                   </h4>                   <h5>Deskripsi Teater Terbuka</h5>                   </div>`)[0];
+                popup_ab67ff6671bf79fe6acd7b47964b8051.setContent(html_ded5369f59f52f7a1089910b9c4f3fab);
+            
+        
+
+        marker_1a0ee729d9a805c631dd81d30b194ee4.bindPopup(popup_ab67ff6671bf79fe6acd7b47964b8051)
+        ;
+
+        
+    
+    
+            marker_1a0ee729d9a805c631dd81d30b194ee4.bindTooltip(
+                `<div>
+                     Teater Terbuka
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2a65eadcef64e0fd662381f94a962c8f = L.marker(
+                [-6.93912489082591, 107.72408346465077],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_3465a0f5caac5341304aa5126c45aa3a = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_a004798b3e750f537a6dbcd7f70b635d = $(`<div id="html_a004798b3e750f537a6dbcd7f70b635d" style="width: 100.0%; height: 100.0%;">                   <img src="source image Asrama Putri" alt="Asrama Putri" style="max-width:100%;max-height:100%">                   <h4>Asrama Putri</br>                   </h4>                   <h5>Deskripsi Asrama Putri</h5>                   </div>`)[0];
+                popup_3465a0f5caac5341304aa5126c45aa3a.setContent(html_a004798b3e750f537a6dbcd7f70b635d);
+            
+        
+
+        marker_2a65eadcef64e0fd662381f94a962c8f.bindPopup(popup_3465a0f5caac5341304aa5126c45aa3a)
+        ;
+
+        
+    
+    
+            marker_2a65eadcef64e0fd662381f94a962c8f.bindTooltip(
+                `<div>
+                     Asrama Putri
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a4f9c17a55c8cc6979b9492abc688297 = L.marker(
+                [-6.940078282450142, 107.72410185731447],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_bbefd7c1257df13ca3fad35086427f0f = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_34c076a43fd67655132ea5f77b1d4ebf = $(`<div id="html_34c076a43fd67655132ea5f77b1d4ebf" style="width: 100.0%; height: 100.0%;">                   <img src="source image Masjid As-Sakinah" alt="Masjid As-Sakinah" style="max-width:100%;max-height:100%">                   <h4>Masjid As-Sakinah</br>                   </h4>                   <h5>Deskripsi Masjid As-Sakinah</h5>                   </div>`)[0];
+                popup_bbefd7c1257df13ca3fad35086427f0f.setContent(html_34c076a43fd67655132ea5f77b1d4ebf);
+            
+        
+
+        marker_a4f9c17a55c8cc6979b9492abc688297.bindPopup(popup_bbefd7c1257df13ca3fad35086427f0f)
+        ;
+
+        
+    
+    
+            marker_a4f9c17a55c8cc6979b9492abc688297.bindTooltip(
+                `<div>
+                     Masjid As-Sakinah
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d97ecf4ef33a94f663addea29c3d96b1 = L.marker(
+                [-6.940291032506306, 107.72442258464262],
+                {
+}
+            ).addTo(map_48195bfebb2a4c09e3f93ea7ef2f3aee);
+        
+    
+        var popup_67f9cc9688f0e72f37e25bde2962b6ad = L.popup({
+  "maxWidth": 500,
+});
+
+        
+            
+                var html_fb4b0fbbdb9cf391993356b80e447d75 = $(`<div id="html_fb4b0fbbdb9cf391993356b80e447d75" style="width: 100.0%; height: 100.0%;">                   <img src="source image Pos Keamanan 2" alt="Pos Keamanan 2" style="max-width:100%;max-height:100%">                   <h4>Pos Keamanan 2</br>                   </h4>                   <h5>Deskripsi Pos Keamanan 2</h5>                   </div>`)[0];
+                popup_67f9cc9688f0e72f37e25bde2962b6ad.setContent(html_fb4b0fbbdb9cf391993356b80e447d75);
+            
+        
+
+        marker_d97ecf4ef33a94f663addea29c3d96b1.bindPopup(popup_67f9cc9688f0e72f37e25bde2962b6ad)
+        ;
+
+        
+    
+    
+            marker_d97ecf4ef33a94f663addea29c3d96b1.bindTooltip(
+                `<div>
+                     Pos Keamanan 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

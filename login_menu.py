@@ -9,7 +9,7 @@ from denah import tampilkan_denah
 # Fungsi untuk menambahkan profil pengguna baru
 def register():
     print("="*70)
-    print("Form Register User DigiDenah")
+    print("Form Register User DigiDenah".center(70))
     print("="*70)
 
     while True:
@@ -23,7 +23,14 @@ def register():
         elif len(username) > 15:
             print("Username maksimal terdiri dari 15 karakter.")
             continue
-        break
+        elif not all(char.isalnum() or char == "_" for char in username):
+            print("Username hanya boleh terdiri dari huruf dan angka/underscore.")
+            continue
+        elif not any(char.isalpha() for char in username):
+            print("Username harus mengandung setidaknya satu huruf.")
+            continue
+        else:
+            break
 
     while True:
         password = input("Masukkan password (8 karakter): ").strip()
@@ -44,7 +51,7 @@ def register():
                 has_digit = True
         
         if not has_letter or not has_digit:
-            print("Password harus terdiri atas huruf dan angka.")
+            print("Password setidaknya harus terdiri atas huruf dan angka.")
             continue
         break
 
@@ -75,7 +82,7 @@ def register():
         break
 
     while True:
-        kelas = input("Masukkan kelas (contoh: RPL 1B): ").strip()
+        kelas = input("Masukkan kelas (contoh: RPL 1B, note: prodi berupa singkatan): ").strip()
         if not kelas:
             print("Kelas tidak boleh kosong.")
             continue
@@ -103,7 +110,7 @@ def register():
     while True:
         tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ").strip()
         if not validasi_tanggal_lahir(tanggal_lahir):
-            print("Format tanggal lahir tidak valid. Gunakan format DD-MM-YYYY.")
+            print("Format tanggal lahir tidak valid. Gunakan format DD-MM-YYYY dan pastikan tanggal sesuai.")
             continue
         break
 
@@ -126,12 +133,23 @@ def register():
         elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
             continue
-        
-        if email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
+        elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
+            continue
+        elif not any(char.isalpha() for char in email):
+            print("Email tidak valid, periksa apakah email sudah sesuai format.")
             continue 
-        break
 
+        if email.endswith("@gmail.com"):
+            prefix = email[:-10]  # Mengambil bagian sebelum "@gmail.com"
+        elif email.endswith("@upi.edu"):
+            prefix = email[:-8]  # Mengambil bagian sebelum "@upi.edu"
+    
+        if not any(char.isalpha() for char in prefix):
+            print("Email tidak valid. Pastikan ada setidaknya satu huruf sebelum domain.")
+            continue
+        break
+    
     # Simpan data pengguna
     data_pengguna.setdefault("users", {})[username] = {
         "password": password,
@@ -152,7 +170,7 @@ def register():
 
     print("\nAnda akan beralih ke halaman login. Mohon tunggu sebentar...")
     time.sleep(2)
-    os.system("cls")
+    os.system("cls" if os.name == "nt" else "clear")
     login_pengguna()
 
 # Fungsi login pengguna
@@ -162,7 +180,7 @@ def login_pengguna():
 
     while True:
         print("="*70)
-        print("LOGIN")
+        print("LOGIN".center(70))
         print("="*70)
         print("Selamat Datang Kembali di DigiMap! Silahkan Masukkan Kredensial disini")
         print("-"*70)
@@ -174,11 +192,11 @@ def login_pengguna():
             if opsiRegister.lower() == "y":
                 print("Anda akan di alihkan ke halaman register")
                 time.sleep(2)
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 register()
             elif opsiRegister.lower() == "n":
                 time.sleep(1)
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 continue
             else:
                 print("Opsi tidak ditemukan, silakan ulangi")
@@ -215,7 +233,7 @@ def login_pengguna():
                     edit_profil(profil, username)
                     tampilkan_profil(profil)
                 elif pilihan == "2":
-                    os.system("cls")
+                    os.system("cls" if os.name == "nt" else "clear")
                     time.sleep(2)
                     menu_pengguna()
                     break
@@ -256,13 +274,13 @@ def menu_login_pengguna():
         if pilihan == "1":
             print("Anda akan beralih ke form login, mohon tunggu sebentar")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             login_pengguna()
             break
         elif pilihan == "2":
             print("Anda akan beralih ke form register, mohon tunggu sebentar")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             register()
             time.sleep(2)
             break
@@ -280,7 +298,7 @@ def load_jadwal_from_json(file_path):
 def menu_pengguna():
     while True:
         print("\n"+"="*70)
-        print("Menu Pengguna")
+        print("Menu Pengguna".center(70))
         print("="*70)
         print("1. Lihat Denah")
         print("2. Cari Jadwal Kelas")
@@ -289,21 +307,21 @@ def menu_pengguna():
 
         opsi = int(input("Pilih opsi (1/2/3/4): "))
         if opsi == 1: 
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             print("Denah UPI Cibiru")
             tampilkan_denah()
             print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
             continue
         elif opsi == 2:
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             # Memuat jadwal dari file JSON
             jadwal = load_jadwal_from_json('data_jadwal.json')  
             cari_jadwal(jadwal)  
         elif opsi == 3:
             time.sleep(1)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             print("-"*40)
             print("Konfirmasi Identitas")
             print("-"*40)
@@ -312,7 +330,7 @@ def menu_pengguna():
                 profil = data_pengguna["users"][username]["profil"]
 
                 time.sleep(1)
-                os.system("cls")
+                os.system("cls" if os.name == "nt" else "clear")
                 tampilkan_profil(profil)   
                 while True:
                     print("\n"+"="*70)
@@ -325,7 +343,7 @@ def menu_pengguna():
                         edit_profil(profil, username)
                         tampilkan_profil(profil)
                     elif pilihan == "2":
-                        os.system("cls")
+                        os.system("cls" if os.name == "nt" else "clear")
                         time.sleep(2)
                         menu_pengguna()
                         break
@@ -345,7 +363,7 @@ def menu_pengguna():
 #TAMU=============================================================================================================================================================================================
 def login_tamu():
     print("="*70)
-    print("Tamu")
+    print("Tamu".center(70))
     print("="*70)
     print("Halo, Tamu! Anda login sebagai pengguna tanpa profil.")
     menu_tamu()
@@ -357,11 +375,13 @@ def masuk_tamu():
     print("-"*70)
     pilihan = input("Pilih opsi (Y/N): ")
     if pilihan.lower() == "y":
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
         menu_login_pengguna()
     if pilihan.lower() == "n":
         print("Anda akan kembali ke menu")
         time.sleep(2)
-        os.system("cls")
+        os.system("cls" if os.name == "nt" else "clear")
         menu_tamu()
 
 def menu_tamu():
@@ -375,11 +395,14 @@ def menu_tamu():
 
     opsi = int(input("Pilih opsi (1/2/3): "))
     if opsi == 1: 
-        print("Denah UPI Cibiru")
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
         tampilkan_denah()
-        print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
+        menu_tamu()
     elif opsi == 2:
-        print("\nAnda tidak dapat melihat jadwal. Silahkan melakukan login terlebih dahulu")
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
+        print("\nAnda tidak dapat melihat jadwal. Silahkan lakukan login terlebih dahulu")
         masuk_tamu()
     elif opsi == 3:
         print("Profil tidak tersedia")
@@ -415,17 +438,17 @@ def main():
         if pilihan == "1":
             print("Anda akan dialihkan ke menu pengguna, mohon tunggu sebentar")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             menu_login_pengguna()
         elif pilihan == "2":
             print("Anda akan masuk sebagai tamu")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             login_tamu()
         elif pilihan == "3":
             print("Anda akan masuk sebagai admin, mohon tunggu sebentar")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             login_admin()
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
