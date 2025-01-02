@@ -10,13 +10,21 @@
                 "no_telepon": "20202020220",
                 "email": "zaii@gmail.com"
             }
+        },
+        "amaliaa": {
+            "password": "l0987h6f",
+            "profil": {
+                "nama": "Siti Amalia Putri",
+                "NIM": "2406274",
+                "kelas": "RPL 1B",
+                "tanggal_lahir": "24-01-2006",
+                "no_telepon": "0987654321",
+                "email": "amalia@upi.edu"
+            }
         }
-
     },
-    
     "admin": {
         "email": "reginanf7@gmail.com",
         "password": "regina12345"
     }
 }
-    

@@ -1554,12 +1554,25 @@
             "jurusan": "PGSD",
             "kelas": "1B",
             "kode_mk": "PG34",
-            "nama_mk": "Pendidikan Dsar",
-            "sks": "1",
+            "nama_mk": "Pendidikan Dasar",
+            "sks": "2",
             "dosen": [
-                "aku"
+                "saya"
             ],
-            "ruang": "12345de"
+            "ruang": "64762728"
+        },
+        {
+            "waktu_mulai": "13:00",
+            "waktu_selesai": "14:00",
+            "jurusan": "RPL",
+            "kelas": "1B",
+            "kode_mk": "RL01",
+            "nama_mk": "PRPL",
+            "sks": "4",
+            "dosen": [
+                "Dian Anggraini"
+            ],
+            "ruang": "20.4B.04.001"
         }
     ]
 }
