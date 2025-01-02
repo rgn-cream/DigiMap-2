@@ -1,13 +1,13 @@
 import json
 
 def cari_jadwal(jadwal):
-    print("\n==========Pencarian Jadwal Kelas==========")
+    print("===============Pencarian Jadwal Kelas===============")
 
  # Daftar hari yang valid
     hari_valid = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
 
     while True:
-        hari = input("Masukkan hari (misal: Senin, Selasa, dst.): ").capitalize().strip()
+        hari = input("\nMasukkan hari (misal: Senin, Selasa, dst.): ").capitalize().strip()
         
         # Validasi input
         if not hari:
@@ -22,7 +22,7 @@ def cari_jadwal(jadwal):
 
     # Meminta input jurusan
     while True:
-        jurusan = input("\nMasukkan jurusan: ").upper().strip()
+        jurusan = input("Masukkan jurusan: ").upper().strip()
         
         # Validasi input
         if not jurusan:
@@ -37,7 +37,7 @@ def cari_jadwal(jadwal):
 
     # Meminta input kelas
     while True:
-        kelas = input("\nMasukkan kelas (contoh: 1B): ").upper().strip()
+        kelas = input("Masukkan kelas (contoh: 1B): ").upper().strip()
 
         # Validasi input
         if not kelas:

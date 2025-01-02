@@ -1,6 +1,6 @@
 import os, time, json
 from fungsi import muat_data, simpan_data, validasi_tanggal_lahir, data_pengguna
-from profil_pengguna import tampilkan_profil, edit_profil
+from Profil_pengguna import tampilkan_profil, edit_profil
 from admin import login_admin
 from search import cari_jadwal
 from denah import tampilkan_denah
@@ -157,25 +157,33 @@ def register():
 
 # Fungsi login pengguna
 def login_pengguna():
-    print("="*70)
-    print("LOGIN")
-    print("="*70)
-    print("Selamat Datang Kembali di DigiMap! Silahkan Masukkan Kredensial disini")
-    print("-"*70)
-
     # Load data pengguna dari file JSON
     data_pengguna = muat_data()
 
     while True:
+        print("="*70)
+        print("LOGIN")
+        print("="*70)
+        print("Selamat Datang Kembali di DigiMap! Silahkan Masukkan Kredensial disini")
+        print("-"*70)
+
         username = input("Masukkan Username   : ")
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
-            print("Anda akan di alihkan ke halaman register")
-            time.sleep(2)
-            os.system("cls")
-            register()
+            opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): "))
+            if opsiRegister.lower() == "y":
+                print("Anda akan di alihkan ke halaman register")
+                time.sleep(2)
+                os.system("cls")
+                register()
+            elif opsiRegister.lower() == "n":
+                time.sleep(1)
+                os.system("cls")
+                continue
+            else:
+                print("Opsi tidak ditemukan, silakan ulangi")
             continue
-        break 
+        break
 
     while True: 
         password = input("Masukkan Password   : ")
@@ -188,7 +196,6 @@ def login_pengguna():
         print("="*70)
         print("Login Berhasil!")
         print("="*70)
-        
         print("Tampilkan Profil Anda (Y/N)")
         tampilan = input("Y/N: ")
         if tampilan.lower() == "y":
@@ -201,32 +208,32 @@ def login_pengguna():
             while True:
                 print("\nPilih opsi:")
                 print("1. Edit Profil")
-                print("2. Kembali ke Menu Utama")
+                print("2. Menu pengguna")
                 pilihan = input("Pilih opsi (1/2): ").strip()
 
                 if pilihan == "1":
                     edit_profil(profil, username)
                     tampilkan_profil(profil)
                 elif pilihan == "2":
+                    os.system("cls")
+                    time.sleep(2)
                     menu_pengguna()
                     break
                 else:
                     print("Pilihan tidak valid. Silakan coba lagi.")
                 time.sleep(2)
-
         elif tampilan.lower() == "n":
-            print("Anda akan dialihkan ke halaman menu utama")
+            print("Anda akan dialihkan ke halaman menu pengguna")
             time.sleep(2)
             os.system("cls" if os.name == "nt" else "clear")
             menu_pengguna()
         else:
             print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
-
-        
     else:
         print("="*70)
         print("Username dan Password tidak Valid!")
         print("="*70)
+        
 
 def logout():
     print("\nAnda akan logout dari sesi saat ini...")
@@ -269,9 +276,12 @@ def load_jadwal_from_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
 
+
 def menu_pengguna():
     while True:
-        print("===Menu Pengguna===")
+        print("\n"+"="*70)
+        print("Menu Pengguna")
+        print("="*70)
         print("1. Lihat Denah")
         print("2. Cari Jadwal Kelas")
         print("3. Lihat Profil")
@@ -279,16 +289,53 @@ def menu_pengguna():
 
         opsi = int(input("Pilih opsi (1/2/3/4): "))
         if opsi == 1: 
+            os.system("cls")
+            time.sleep(1)
             print("Denah UPI Cibiru")
             tampilkan_denah()
             print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
             continue
         elif opsi == 2:
+            os.system("cls")
+            time.sleep(1)
             # Memuat jadwal dari file JSON
             jadwal = load_jadwal_from_json('data_jadwal.json')  
             cari_jadwal(jadwal)  
         elif opsi == 3:
-            tampilkan_profil()    
+            time.sleep(1)
+            os.system("cls")
+            print("-"*40)
+            print("Konfirmasi Identitas")
+            print("-"*40)
+            username = input("Masukan username: ")
+            if username in data_pengguna["users"]:
+                profil = data_pengguna["users"][username]["profil"]
+
+                time.sleep(1)
+                os.system("cls")
+                tampilkan_profil(profil)   
+                while True:
+                    print("\n"+"="*70)
+                    print("Pilih opsi:")
+                    print("1. Edit Profil")
+                    print("2. Menu pengguna")
+                    pilihan = input("Pilih opsi (1/2): ").strip()
+
+                    if pilihan == "1":
+                        edit_profil(profil, username)
+                        tampilkan_profil(profil)
+                    elif pilihan == "2":
+                        os.system("cls")
+                        time.sleep(2)
+                        menu_pengguna()
+                        break
+                    else:
+                        print("Pilihan tidak valid. Silakan coba lagi.")
+                    time.sleep(2) 
+            else:
+                print("Profil tidak ditemukan. Silakan login kembali.") 
+                menu_login_pengguna()  
+        
         elif opsi == 4:
             logout()
             break
@@ -319,14 +366,14 @@ def masuk_tamu():
 
 def menu_tamu():
     print("\n")
-    print("-"*70)
+    print("="*70)
     print("Menu tamu")
-    print("-"*70)
+    print("="*70)
     print("1. Lihat Denah")
     print("2. Cari Jadwal Kelas")
     print("3. Lihat Profil")
 
-    opsi = int(input("Pilih opsi (1/2/3/4): "))
+    opsi = int(input("Pilih opsi (1/2/3): "))
     if opsi == 1: 
         print("Denah UPI Cibiru")
         tampilkan_denah()
@@ -345,32 +392,41 @@ def menu_tamu():
 # Menu utama=====================================================================================================================================================================================
 def main():
     while True:
-        print("\n" + "=" * 40)
+        print("-" * 70)
+        print(">>>> SELAMAT DATANG DI DIGIMAP <<<<".center(70))
+        print("-" * 70)
+        print("\n" + "=" * 70)
         print("Masuk sebagai")
-        print("=" * 40)
-        print("1. Admin")
-        print("2. Pengguna")
-        print("3. Tamu")
+        print("=" * 70)
+        print("1. Pengguna")
+        print("2. Tamu")
+        print("3. Admin")
         print("4. Keluar")
-        print("=" * 40)
+        print("=" * 70)
 
         pilihan = input("Pilih opsi (1/2/3/4): ")
 
-        if pilihan == "1":
-            print("Anda akan masuk sebagai admin, mohon tunggu sebentar")
+        if not pilihan.isdigit() or int(pilihan) not in range(1, 5):
+            print("Pilihan tidak valid. Silakan masukkan angka 1, 2, 3, atau 4.")
             time.sleep(2)
-            os.system("cls")
-            login_admin()
-        elif pilihan == "2":
+            os.system("cls" if os.name == "nt" else "clear")  
+            continue
+
+        if pilihan == "1":
             print("Anda akan dialihkan ke menu pengguna, mohon tunggu sebentar")
             time.sleep(2)
             os.system("cls")
             menu_login_pengguna()
-        elif pilihan == "3":
+        elif pilihan == "2":
             print("Anda akan masuk sebagai tamu")
             time.sleep(2)
             os.system("cls")
             login_tamu()
+        elif pilihan == "3":
+            print("Anda akan masuk sebagai admin, mohon tunggu sebentar")
+            time.sleep(2)
+            os.system("cls")
+            login_admin()
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break

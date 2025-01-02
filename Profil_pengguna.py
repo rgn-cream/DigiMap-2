@@ -1,7 +1,10 @@
 from fungsi import simpan_data, validasi_tanggal_lahir, data_pengguna
+from fungsi import muat_data
 
 def tampilkan_profil(profil):
-    print("=== Profil Pengguna ===")
+    print("="*70)
+    print("Profil Pengguna".center(70))
+    print("="*70)
     print(f"Nama: {profil['nama']}")
     print(f"NIM: {profil['NIM']}")
     print(f"Kelas: {profil['kelas']}")
