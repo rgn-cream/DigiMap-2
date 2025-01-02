@@ -308,29 +308,30 @@ def menu_pengguna():
         print("3. Lihat Profil")
         print("4. Logout")
 
-        opsi = int(input("Pilih opsi (1/2/3/4): ")).strip()
+        opsi = input("Pilih opsi (1/2/3/4): ").strip()
 
-        if opsi == 1: 
+        if opsi == "1": 
             os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             print("Denah UPI Cibiru")
             tampilkan_denah()
             print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
             continue
-        elif opsi == 2:
+        elif opsi == "2":
             os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             # Memuat jadwal dari file JSON
             jadwal = load_jadwal_from_json('data_jadwal.json')  
             cari_jadwal(jadwal)  
-        elif opsi == 3:
+        elif opsi == "3":
             time.sleep(1)
             os.system("cls" if os.name == "nt" else "clear")
             print("-"*40)
             print("Konfirmasi Identitas")
             print("-"*40)
-            username = input("Masukan username: ")
-            if username in data_pengguna["users"]:
+            username = input("Masukkan username: ")
+            password = input("Masukkan password: ")
+            if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
                 profil = data_pengguna["users"][username]["profil"]
 
                 time.sleep(1)
