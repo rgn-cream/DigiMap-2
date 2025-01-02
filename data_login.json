@@ -76,6 +76,17 @@
                 "no_telepon": "1234567890234",
                 "email": "w@gmail.com"
             }
+        },
+        "eerr": {
+            "password": "adaeaed2233",
+            "profil": {
+                "nama": "reeada",
+                "NIM": "2323111",
+                "kelas": "rpl 1c",
+                "tanggal_lahir": "26-07-2007",
+                "no_telepon": "0982213748191",
+                "email": "r@gmail.com"
+            }
         }
     },
     "admin": {
