@@ -329,8 +329,9 @@ def menu_pengguna():
             print("-"*40)
             print("Konfirmasi Identitas")
             print("-"*40)
-            username = input("Masukan username: ")
-            if username in data_pengguna["users"]:
+            username = input("Masukkan username: ")
+            password = input("Masukkan password: ")
+            if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
                 profil = data_pengguna["users"][username]["profil"]
 
                 time.sleep(1)
