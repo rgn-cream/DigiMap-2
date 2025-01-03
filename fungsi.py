@@ -13,8 +13,9 @@ def muat_data():
 def simpan_data(data):
     with open(FILE_DATABASE, "w") as file:
         json.dump(data, file, indent=4)
+=====
+#Fungsi validasi tanggal lahir
 
-# Fungsi  validasi tanggal
 def validasi_tanggal_lahir(tanggal):
     try:
         datetime.strptime(tanggal, "%d-%m-%Y")
