@@ -32,6 +32,61 @@
                 "no_telepon": "0891234567890",
                 "email": "digimap@upi.edu"
             }
+        },
+        "prpl": {
+            "password": "prpl24dihati",
+            "profil": {
+                "nama": "rpl",
+                "NIM": "2334567",
+                "kelas": "pgpaud 1a",
+                "tanggal_lahir": "09-07-2009",
+                "no_telepon": "0987637261524",
+                "email": "prpl@upi.edu"
+            }
+        },
+        "siapa11": {
+            "password": "re7777(((",
+            "profil": {
+                "nama": "r",
+                "NIM": "2406043",
+                "kelas": "tekkom 1b",
+                "tanggal_lahir": "30-09-2009",
+                "no_telepon": "0987654321234",
+                "email": "@upi.edu"
+            }
+        },
+        "apa": {
+            "password": "apaya123",
+            "profil": {
+                "nama": "apaya",
+                "NIM": "2406043",
+                "kelas": "tekkom 1a",
+                "tanggal_lahir": "24-09-2009",
+                "no_telepon": "0892435671678",
+                "email": "@gmail.com"
+            }
+        },
+        "re": {
+            "password": "re1234567",
+            "profil": {
+                "nama": "rere",
+                "NIM": "2324444",
+                "kelas": "rpl 1b",
+                "tanggal_lahir": "26-07-2007",
+                "no_telepon": "0892318742345",
+                "email": "@upi.edu"
+            }
+        },
+        "apaya": {
+            "password": "ahhh7777",
+            "profil": {
+                "nama": "hah",
+                "NIM": "1234567",
+                "kelas": "rpl 1a",
+                "tanggal_lahir": "20-09-2003",
+                "no_telepon": "1234567890234",
+                "email": "w@gmail.com"
+            }
         }
     },
     "admin": {

@@ -2,6 +2,10 @@
 import folium
 
 def tampilkan_denah():
+    print("="*70)
+    print("Denah UPI Cibiru".center(70))
+    print("="*70)
+    print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'\n")
     upi_cibiru = folium.Map(location = [-6.939787174459237, 107.72529789772535],
                             zoom_start = 20)
     
