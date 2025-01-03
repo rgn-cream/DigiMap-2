@@ -440,7 +440,7 @@ def main():
         print("1. Pengguna")
         print("2. Tamu")
         print("3. Admin")
-        print("4. Keluar")
+        print("4. Keluar dari DIGIMAP")
         print("=" * 70)
 
         pilihan = input("Pilih opsi (1/2/3/4): ").strip()
