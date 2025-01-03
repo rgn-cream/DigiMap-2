@@ -11,6 +11,17 @@
                 "email": "zaii@gmail.com"
             }
         },
+        "amaliaa": {
+            "password": "l0987h6f",
+            "profil": {
+                "nama": "Siti Amalia Putri",
+                "NIM": "2406274",
+                "kelas": "RPL 1B",
+                "tanggal_lahir": "24-01-2006",
+                "no_telepon": "0987654321",
+                "email": "amalia@upi.edu"
+            }
+        }, 
         "tubes": {
             "password": "tubesyummy24",
             "profil": {
@@ -90,7 +101,7 @@
         }
     },
     "admin": {
-        "email": "reginanf7@gmail.com",
-        "password": "regina12345"
+        "email": "admin@gmail.com",
+        "password": "admin12345"
     }
 }

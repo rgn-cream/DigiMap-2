@@ -1,4 +1,5 @@
 import json, os
+from datetime import datetime
 
 FILE_DATABASE = "data_login.json"
 
@@ -13,29 +14,36 @@ def simpan_data(data):
     with open(FILE_DATABASE, "w") as file:
         json.dump(data, file, indent=4)
 
+# def validasi_tanggal_lahir(tanggal):
+#     try:
+#         if not isinstance(tanggal, str):
+#             return False
+#         if len(tanggal) != 10 or tanggal[2] != "-" or tanggal[5] != "-":
+#             return False
+#         hari, bulan, tahun = tanggal.split("-")
+#         if not (hari.isdigit() and bulan.isdigit() and tahun.isdigit()):
+#             return False
+#         hari, bulan, tahun = int(hari), int(bulan), int(tahun)
+#         if not (1 <= hari <= 31 and 1 <= bulan <= 12 and len(str(tahun)) == 4):
+#             return False
+#         if bulan in [4, 6, 9, 11] and hari > 30:
+#             return False
+#         if bulan == 2:
+#             if (tahun % 4 == 0 and (tahun % 100 != 0 or tahun % 400 == 0)):
+#                 if hari > 29:
+#                     return False
+#             else:
+#                 if hari > 28:
+#                     return False
+#         return True
+#     except:
+#         return False
+
 def validasi_tanggal_lahir(tanggal):
     try:
-        if not isinstance(tanggal, str):
-            return False
-        if len(tanggal) != 10 or tanggal[2] != "-" or tanggal[5] != "-":
-            return False
-        hari, bulan, tahun = tanggal.split("-")
-        if not (hari.isdigit() and bulan.isdigit() and tahun.isdigit()):
-            return False
-        hari, bulan, tahun = int(hari), int(bulan), int(tahun)
-        if not (1 <= hari <= 31 and 1 <= bulan <= 12 and len(str(tahun)) == 4):
-            return False
-        if bulan in [4, 6, 9, 11] and hari > 30:
-            return False
-        if bulan == 2:
-            if (tahun % 4 == 0 and (tahun % 100 != 0 or tahun % 400 == 0)):
-                if hari > 29:
-                    return False
-            else:
-                if hari > 28:
-                    return False
+        datetime.strptime(tanggal, "%d-%m-%Y")
         return True
-    except:
+    except ValueError:
         return False
 
 data_pengguna = muat_data()
