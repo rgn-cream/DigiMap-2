@@ -1,5 +1,5 @@
 import json, os, time
-from fungsi import muat_data 
+from fungsi import muat_data
 
 def ulangiLoginAdmin():
     login_admin()
@@ -41,25 +41,32 @@ def login_admin():
             continue
         break
 
-    while True:
+    kesempatan = 3
+    while kesempatan > 0:
         password = input("Masukkan password (8 karakter): ").strip()
         if not password:
             print("Password tidak boleh kosong.")
-            continue
         elif len(password) < 8:
             print("Password harus terdiri dari 8 karakter.")
-            continue
-        break
+        else:
+            break
+        kesempatan -= 1
+        print(f"Anda memiliki {kesempatan} kesempatan lagi.")
 
     if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
         print("Login Admin berhasil!")
         print("Anda akan memasuki menu admin. Mohon tunggu sebentar...")
-        os.system("cls")
         time.sleep(2)
+        os.system("cls")
         file_path = 'data_jadwal.json'
         menu_admin(file_path)
     else: 
-        print("Username dan password tidak valid!")
+        print("Kesempatan habis! Kembali ke menu awal.")
+        time.sleep(2)
+        os.system("cls")
+        from login_menu import main
+        main()
+
 
 # Fungsi untuk membaca data dari file JSON
 def baca_data(file_path):
@@ -242,7 +249,10 @@ def tambah_jadwal(file_path):
     # Menyimpan data kembali ke file JSON
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil ditambahkan!")
-
+    print("Anda akan dialihkan ke menu utama") 
+    os.system("cls" if os.name == "nt" else "clear")
+    time.sleep(2)
+    
 # Fungsi untuk mengedit jadwal
 def edit_jadwal(file_path):
     print("="*70)
@@ -251,11 +261,19 @@ def edit_jadwal(file_path):
 
     data_jadwal = baca_data(file_path)
 
-    # Meminta input hari
-    hari = input("Masukkan hari yang ingin diedit: ").capitalize().strip()
-    if hari not in data_jadwal:
-        print("Error: Hari tidak ditemukan.")
-        return
+    while True:
+        # Meminta input hari
+        hari = input("Masukkan hari yang ingin diedit: ").capitalize().strip()
+        if not hari:
+            kembali = input("Input kosong. Apakah Anda ingin kembali ke menu admin? (y/n): ").strip().lower()
+            if kembali == 'y':
+                return  
+            else:
+                continue    
+        if hari not in data_jadwal:
+            print("Error: Hari tidak ditemukan.")
+            continue            
+        break
 
     # Menampilkan jadwal yang ada dalam format tabel
     tampilkan_jadwal(hari, data_jadwal[hari])
@@ -343,6 +361,8 @@ def edit_jadwal(file_path):
         if not dosen:
             dosen = jadwal_edit['dosen']  # Tetap menggunakan data lama
             break
+        elif any(char.isdigit() for char in dosen):
+            print("Error: Nama dosen tidak boleh mengandung angka. Silakan masukkan lagi.")
         else:
             jadwal_edit['dosen'] = [dosen.strip() for dosen in dosen.split(',')]
             break
@@ -352,15 +372,27 @@ def edit_jadwal(file_path):
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil diperbarui.")
 
+    print("Anda akan dialihkan ke menu utama")
+    os.system("cls" if os.name == "nt" else "clear")
+    time.sleep(2)
+
 # Fungsi untuk menghapus jadwal
 def hapus_jadwal(file_path):
     data_jadwal = baca_data(file_path)
 
-    # Meminta input hari
-    hari = input("Masukkan hari yang ingin dihapus jadwalnya: ").capitalize().strip()
-    if hari not in data_jadwal:
-        print("Error: Hari tidak ditemukan.")
-        return
+    while True:
+        # Meminta input hari
+        hari = input("Masukkan hari yang ingin dihapus: ").capitalize().strip()
+        if not hari:
+            kembali = input("Input kosong. Apakah Anda ingin kembali ke menu admin? (y/n): ").strip().lower()
+            if kembali == 'y':
+                return  
+            else:
+                continue    
+        if hari not in data_jadwal:
+            print("Error: Hari tidak ditemukan.")
+            continue            
+        break
 
     # Menampilkan jadwal yang ada dalam format tabel
     tampilkan_jadwal(hari, data_jadwal[hari])
@@ -387,15 +419,9 @@ def hapus_jadwal(file_path):
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil dihapus!")
 
-    pilihan = input("Apakah anda ingin kembali ke menu utama?(y/n): ")
-    while True:
-        if pilihan == "y":
-            menu_admin()
-        elif pilihan == "n":
-            break
-        else:
-            print("Pilihan tidak valid. Silakan coba lagi.")
-            time.sleep(2)
+    print("Anda akan dialihkan ke menu utama")
+    os.system("cls" if os.name == "nt" else "clear")
+    time.sleep(2)
 
 # Fungsi utama untuk menampilkan menu
 def menu_admin(file_path):
@@ -412,21 +438,21 @@ def menu_admin(file_path):
         pilihan = input("Pilih tindakan (1/2/3/4): ").strip()
         
         if pilihan == '1':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             tambah_jadwal(file_path)
         elif pilihan == '2':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             edit_jadwal(file_path)
         elif pilihan == '3':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             hapus_jadwal(file_path)
         elif pilihan == '4':
-            os.system("cls")
-            time.sleep(2)
             print("Terima kasih! Keluar dari program.")
+            os.system("cls" if os.name == "nt" else "clear")
+            time.sleep(2)
             break
         else:
             print("Pilihan tidak valid. Harap pilih antara 1- 4.")
