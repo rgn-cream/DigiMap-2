@@ -200,7 +200,7 @@ def login_pengguna():
                 continue
             else:
                 print("Opsi tidak ditemukan, silakan ulangi")
-            continue
+                continue
 
         password = input("Masukkan Password   : ")
         if data_pengguna["users"][username]["password"] != password:
@@ -239,16 +239,18 @@ def login_pengguna():
                         menu_pengguna()
                         break
                     else:
-                        print("Pilihan tidak valid. Silakan coba lagi.")
+                        print("Pilihan tidak valid. Silakan coba lagi (masukkan 1 atau 2).")
                     time.sleep(2)
             elif tampilan.lower() == "n":
                 print("Anda akan dialihkan ke halaman menu pengguna")
                 time.sleep(2)
                 os.system("cls" if os.name == "nt" else "clear")
                 menu_pengguna()
+                break
             else:
-                print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
-            break
+                print("Pilihan Anda tidak tersedia. Anda akan dialihkan kembali ke form login")
+                time.sleep(3)
+                os.system("cls" if os.name =="nt" else "clear")               
 
     if kesempatan == 0:
         print("="*70)
@@ -288,15 +290,14 @@ def menu_login_pengguna():
             time.sleep(2)
             os.system("cls" if os.name == "nt" else "clear")
             register()
-            time.sleep(2)
             break
         else:
             print("Pilihan tidak valid. Silakan coba lagi, masukkan angka 1 atau 2.")
+        continue
 
 def load_jadwal_from_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
-
 
 def menu_pengguna():
     while True:
@@ -313,9 +314,7 @@ def menu_pengguna():
         if opsi == "1": 
             os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
-            print("Denah UPI Cibiru")
             tampilkan_denah()
-            print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
             continue
         elif opsi == "2":
             os.system("cls" if os.name == "nt" else "clear")
@@ -359,7 +358,7 @@ def menu_pengguna():
                 print("Profil tidak ditemukan. Silakan login kembali.") 
                 menu_login_pengguna()  
         
-        elif opsi == 4:
+        elif opsi == "4":
             logout()
             break
         else: 
@@ -391,7 +390,9 @@ def masuk_tamu():
         os.system("cls" if os.name == "nt" else "clear")
         menu_tamu()
     else: 
-        print("Pilihan tidak valid, pilih Y atau N")
+        print("Pilihan tidak valid, anda akan dialihkan ke menu tamu")
+        time.sleep(3)
+        os.system("cls" if os.name == "nt" else "clear")
 
 def menu_tamu():
     print("\n")
@@ -401,8 +402,9 @@ def menu_tamu():
     print("1. Lihat Denah")
     print("2. Cari Jadwal Kelas")
     print("3. Lihat Profil")
+    print("4. Logout")
 
-    opsi = input("Pilih opsi (1/2/3): ").strip()
+    opsi = input("Pilih opsi (1/2/3/4): ").strip()
     
     if opsi == "1": 
         time.sleep(2)
@@ -420,8 +422,11 @@ def menu_tamu():
     elif opsi == "4":
         logout()
     else: 
-        print("Pilihan tidak valid. Pastikan memilih (1/2/3)")
-    menu_tamu()
+        print("Pilihan tidak valid. Pastikan memilih (1/2/3/4)")
+        time.sleep(3)
+        os.system("cls" if os.name == "nt" else "clear")
+        menu_tamu()
+
 
 # Menu utama=====================================================================================================================================================================================
 def main():
