@@ -412,22 +412,22 @@ def menu_admin(file_path):
         pilihan = input("Pilih tindakan (1/2/3/4): ").strip()
         
         if pilihan == '1':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             tambah_jadwal(file_path)
         elif pilihan == '2':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             edit_jadwal(file_path)
         elif pilihan == '3':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             hapus_jadwal(file_path)
         elif pilihan == '4':
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             time.sleep(2)
             print("Terima kasih! Keluar dari program.")
             break
         else:
-            print("Pilihan tidak valid. Harap pilih antara 1- 4.")
+            print("Pilihan tidak valid. Harap pilih antara 1 - 4.")
     

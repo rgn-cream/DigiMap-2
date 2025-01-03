@@ -5,60 +5,118 @@ def ulangiLoginAdmin():
     login_admin()
 
 def login_admin():
+    from login_menu import main
+
     print("="*70)
     print("LOGIN ADMIN")
     print("="*70)
     
     data_admin = muat_data()
+    attempt_email = 0  # Penghitung percobaan email
+    attempt_password = 0  # Penghitung percobaan password
     while True:
         email = input("Masukkan email (ex: nama@gmail.com/@upi.edu): ").strip()
+        attempt_email += 1
+
+        if attempt_email > 3:  # Jika percobaan gagal lebih dari 3 kali
+            print("Anda telah gagal login sebanyak 3 kali. Kembali ke menu awal.")
+            time.sleep(2)
+            os.system("cls")
+            main()
+
+        if not email:
+            print("Email tidak boleh kosong.")
+            kembali = input("Apakah Anda ingin kembali ke menu awal? (y/n): ").strip().lower()
+            if kembali == 'y':
+                os.system("cls")
+                main()
+            elif kembali == 'n':
+                os.system("cls")
+                continue
+            else:
+                print("Pilihan tidak valid. Silakan coba lagi.")
+                continue
+
         if email != data_admin["admin"].get("email"):
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
-            time.sleep(2)
-            os.system("cls")
-            ulangiLoginAdmin()
-            return
-        elif not email:
-            print("Email tidak boleh kosong.")
-            print("Email tidak valid, periksa kembali email yang dimasukkan.")
-            time.sleep(2)
-            os.system("cls")
-            ulangiLoginAdmin()
-            continue
+            kembali = input("Apakah Anda ingin kembali ke menu awal? (y/n): ").strip().lower()
+            if kembali == 'y':
+                os.system("cls")
+                main()
+            elif kembali == 'n':
+                os.system("cls")
+                continue
+            else:
+                print("Pilihan tidak valid. Silakan coba lagi.")
+                continue
+
         elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
-            print("Email tidak valid, periksa kembali email yang dimasukkan.")
-            time.sleep(2)
-            os.system("cls")
-            ulangiLoginAdmin()
-            continue
+            kembali = input("Apakah Anda ingin kembali ke menu awal? (y/n): ").strip().lower()
+            if kembali == 'y':
+                os.system("cls")
+                main()
+            elif kembali == 'n':
+                os.system("cls")
+                continue
+            else:
+                print("Pilihan tidak valid. Silakan coba lagi.")
+                continue
+
         elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
-            print("Email tidak valid, periksa kembali email yang dimasukkan.")
-            time.sleep(2)
-            os.system("cls")
-            ulangiLoginAdmin()
-            continue
+            kembali = input("Apakah Anda ingin kembali ke menu awal? (y/n): ").strip().lower()
+            if kembali == 'y':
+                os.system("cls")
+                main()
+            elif kembali == 'n':
+                os.system("cls")
+                continue
+            else:
+                print("Pilihan tidak valid. Silakan coba lagi.")
+                continue
+
+        # Jika email valid
         break
 
+    # Validasi password
     while True:
         password = input("Masukkan password (8 karakter): ").strip()
+        attempt_password += 1
+
+        if attempt_password > 3:  # Jika percobaan gagal lebih dari 3 kali
+            print("Anda telah gagal login sebanyak 3 kali. Kembali ke menu awal.")
+            time.sleep(2)
+            os.system("cls")
+            main()
+
         if not password:
             print("Password tidak boleh kosong.")
-            continue
+            kembali = input("Apakah Anda ingin kembali ke menu awal? (y/n): ").strip().lower()
+            if kembali == 'y':
+                os.system("cls")
+                main()
+            elif kembali == 'n':
+                os.system("cls")
+                continue
+            else:
+                print("Pilihan tidak valid. Silakan coba lagi.")
+                continue
         elif len(password) < 8:
-            print("Password harus terdiri dari 8 karakter.")
+            print("Password harus terdiri dari minimal 8 karakter.")
             continue
+
         break
 
+    # Validasi login berhasil
     if email == data_admin["admin"]["email"] and password == data_admin["admin"]["password"]:
         print("Login Admin berhasil!")
         print("Anda akan memasuki menu admin. Mohon tunggu sebentar...")
-        os.system("cls")
         time.sleep(2)
+        os.system("cls")
         file_path = 'data_jadwal.json'
         menu_admin(file_path)
-    else: 
+    else:
         print("Username dan password tidak valid!")
 
 # Fungsi untuk membaca data dari file JSON
@@ -94,9 +152,6 @@ def tampilkan_jadwal(hari, jadwal):
 
 # Fungsi untuk menambahkan jadwal baru
 def tambah_jadwal(file_path):
-    print("="*70)
-    print("Tambah Jadwal")
-    print("="*70)
     data_jadwal = baca_data(file_path)
 
     # Daftar hari yang valid
@@ -140,7 +195,7 @@ def tambah_jadwal(file_path):
 
     # Meminta input jurusan
     while True:
-        jurusan = input("Masukkan jurusan (contoh: RPL): ").upper().strip()
+        jurusan = input("\nMasukkan jurusan (contoh: RPL): ").upper().strip()
         
         # Validasi input
         if not jurusan:
@@ -155,7 +210,7 @@ def tambah_jadwal(file_path):
 
     # Meminta input kelas
     while True:
-        kelas = input("Masukkan kelas (contoh: 1B): ").upper().strip()
+        kelas = input("\nMasukkan kelas (contoh: 1B): ").upper().strip()
 
         # Validasi input
         if not kelas:
@@ -245,10 +300,6 @@ def tambah_jadwal(file_path):
 
 # Fungsi untuk mengedit jadwal
 def edit_jadwal(file_path):
-    print("="*70)
-    print("Edit Jadwal")
-    print("="*70)
-
     data_jadwal = baca_data(file_path)
 
     # Meminta input hari
@@ -401,33 +452,24 @@ def hapus_jadwal(file_path):
 def menu_admin(file_path):
     file_path = 'data_jadwal.json'
     while True:
-        print("="*70)
-        print("Menu:")
-        print("="*70)
+        print("\nMenu:")
         print("1. Tambah Jadwal")
         print("2. Edit Jadwal")
         print("3. Hapus Jadwal")
         print("4. Keluar")
         
-        pilihan = input("Pilih tindakan (1/2/3/4): ").strip()
+        pilihan = input("Pilih tindakan (1-4): ").strip()
         
         if pilihan == '1':
-            os.system("cls")
-            time.sleep(2)
             tambah_jadwal(file_path)
         elif pilihan == '2':
-            os.system("cls")
-            time.sleep(2)
             edit_jadwal(file_path)
         elif pilihan == '3':
-            os.system("cls")
-            time.sleep(2)
             hapus_jadwal(file_path)
         elif pilihan == '4':
-            os.system("cls")
-            time.sleep(2)
             print("Terima kasih! Keluar dari program.")
             break
         else:
             print("Pilihan tidak valid. Harap pilih antara 1- 4.")
     
+login_admin()
