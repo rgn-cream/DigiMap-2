@@ -5,7 +5,8 @@
             "profil": {
                 "nama": "zaidan",
                 "NIM": "2404903",
-                "kelas": "RPL 1B",
+                "jurusan": "RPL",
+                "kelas": "1B",
                 "tanggal_lahir": "22-22-2000",
                 "no_telepon": "20202020220",
                 "email": "zaii@gmail.com"
@@ -16,87 +17,71 @@
             "profil": {
                 "nama": "Siti Amalia Putri",
                 "NIM": "2406274",
-                "kelas": "RPL 1B",
+                "jurusan": "RPL",
+                "kelas": "1B",
                 "tanggal_lahir": "24-01-2006",
                 "no_telepon": "0987654321",
                 "email": "amalia@upi.edu"
             }
-        }, 
+        },
+        "rere": {
+            "password": "login123",
+            "profil": {
+                "nama": "Regina Nur F",
+                "NIM": "2401234",
+                "jurusan": "RPL",
+                "kelas": "1B",
+                "tanggal_lahir": "01-01-2006",
+                "no_telepon": "0987654321",
+                "email": "rere@upi.edu"
+            }
+        },
+        "bagas": {
+            "password": "login456",
+            "profil": {
+                "nama": "Fajri Bagaskara B.",
+                "NIM": "2405678",
+                "jurusan": "RPL",
+                "kelas": "1B",
+                "tanggal_lahir": "11-01-2006",
+                "no_telepon": "0987654321",
+                "email": "bagas@upi.edu"
+            }
+        },
+        "tariq": {
+            "password": "login789",
+            "profil": {
+                "nama": "Tariq Ahmad",
+                "NIM": "2409012",
+                "jurusan": "RPL",
+                "kelas": "RPL 1B",
+                "tanggal_lahir": "22-06-2006",
+                "no_telepon": "0987654321",
+                "email": "tariq@upi.edu"
+            }
+        },
         "tubes": {
             "password": "tubesyummy24",
             "profil": {
                 "nama": "tubes",
                 "NIM": "2406043",
-                "kelas": "rpl 1b",
+                "jurusan": "RPL",
+                "kelas": "1b",
                 "tanggal_lahir": "26-07-2024",
                 "no_telepon": "0891234567890",
                 "email": "digimap@upi.edu"
             }
         },
-        "prpl": {
-            "password": "prpl24dihati",
+        "Digimap": {
+            "password": "digimap123",
             "profil": {
-                "nama": "rpl",
-                "NIM": "2334567",
-                "kelas": "pgpaud 1a",
-                "tanggal_lahir": "09-07-2009",
-                "no_telepon": "0987637261524",
-                "email": "prpl@upi.edu"
-            }
-        },
-        "siapa11": {
-            "password": "re7777(((",
-            "profil": {
-                "nama": "r",
-                "NIM": "2406043",
-                "kelas": "tekkom 1b",
-                "tanggal_lahir": "30-09-2009",
-                "no_telepon": "0987654321234",
-                "email": "@upi.edu"
-            }
-        },
-        "apa": {
-            "password": "apaya123",
-            "profil": {
-                "nama": "apaya",
-                "NIM": "2406043",
-                "kelas": "tekkom 1a",
-                "tanggal_lahir": "24-09-2009",
-                "no_telepon": "0892435671678",
-                "email": "@gmail.com"
-            }
-        },
-        "re": {
-            "password": "re1234567",
-            "profil": {
-                "nama": "rere",
-                "NIM": "2324444",
-                "kelas": "rpl 1b",
-                "tanggal_lahir": "26-07-2007",
-                "no_telepon": "0892318742345",
-                "email": "@upi.edu"
-            }
-        },
-        "apaya": {
-            "password": "ahhh7777",
-            "profil": {
-                "nama": "hah",
+                "nama": "DigiMap",
                 "NIM": "1234567",
-                "kelas": "rpl 1a",
-                "tanggal_lahir": "20-09-2003",
-                "no_telepon": "1234567890234",
-                "email": "w@gmail.com"
-            }
-        },
-        "eerr": {
-            "password": "adaeaed2233",
-            "profil": {
-                "nama": "reeada",
-                "NIM": "2323111",
-                "kelas": "rpl 1c",
-                "tanggal_lahir": "26-07-2007",
-                "no_telepon": "0982213748191",
-                "email": "r@gmail.com"
+                "jurusan": "RPL",
+                "kelas": "1B",
+                "tanggal_lahir": "02-02-2020",
+                "no_telepon": "0987654320",
+                "email": "digimap@upi.edu"
             }
         }
     },

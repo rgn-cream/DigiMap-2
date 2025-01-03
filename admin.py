@@ -160,7 +160,7 @@ def tambah_jadwal(file_path):
             break 
 
     # Daftar kelas valid berdasarkan jurusan
-    if jurusan in ["PGSD", "PGPAUD"]:
+    if jurusan in ["PGSD"]:
         kelas_valid = ["A", "B", "C", "D", "E", "F"]
     else:
         kelas_valid = ["A", "B", "C"]
@@ -330,7 +330,7 @@ def edit_jadwal(file_path):
             break
 
     # Jurusan
-    jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
+    jurusan_valid = ["RPL", "TEKKOM", "PGSD", "PMM"]
     while True:
         jurusan = input(f"Jurusan [{jadwal_edit['jurusan']}]: ").upper().strip()
         if not jurusan:
@@ -343,7 +343,7 @@ def edit_jadwal(file_path):
             break
 
     # Kelas
-    if jadwal_edit['jurusan'] in ["PGSD", "PGPAUD"]:
+    if jadwal_edit['jurusan'] in ["PGSD"]:
         kelas_valid = ["A", "B", "C", "D", "E", "F"]
     else:
         kelas_valid = ["A", "B", "C"]
