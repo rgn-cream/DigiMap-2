@@ -146,19 +146,6 @@
             "ruang": "20.4E.02.001"
         },
         {
-            "waktu_mulai": "07:00",
-            "waktu_selesai": "10:20",
-            "jurusan": "TEKKOM",
-            "kelas": "1B",
-            "kode_mk": "TR200",
-            "nama_mk": "Pemrograman Dasar",
-            "sks": 4,
-            "dosen": [
-                "Dr. Eng. Munawir, S.Kom., M.T."
-            ],
-            "ruang": "20.4E.02.001"
-        },
-        {
             "waktu_mulai": "13:00",
             "waktu_selesai": "15:30",
             "jurusan": "TEKKOM",
@@ -378,32 +365,6 @@
                 "Asep Rudi Nurjaman, M.Pd."
             ],
             "ruang": "20.4B.04.006"
-        },
-        {
-            "waktu_mulai": "13:00",
-            "waktu_selesai": "15:30",
-            "jurusan": "PMM",
-            "kelas": "1A",
-            "kode_mk": "KU100",
-            "nama_mk": "Matematika Diskrit",
-            "sks": 3,
-            "dosen": [
-                "Nurhidayatulloh, S.Pd., M.T."
-            ],
-            "ruang": "20.4B.04.001"
-        },
-        {
-            "waktu_mulai": "13:00",
-            "waktu_selesai": "16:20",
-            "jurusan": "PMM",
-            "kelas": "1B",
-            "kode_mk": "KU100",
-            "nama_mk": "Ilustrasi",
-            "sks": 4,
-            "dosen": [
-                "Dian Rinjani, S.Pd., M.Pd."
-            ],
-            "ruang": "20.4B.04.001"
         }
     ],
     "Selasa": [
@@ -1506,32 +1467,6 @@
                 "Dr. Kurniawati, S.Pd., M.Pd. "
             ],
             "ruang": ""
-        },
-        {
-            "waktu_mulai": "12:00",
-            "waktu_selesai": "12:50",
-            "jurusan": "PGSD",
-            "kelas": "1B",
-            "kode_mk": "PG34",
-            "nama_mk": "Pendidikan Dasar",
-            "sks": "2",
-            "dosen": [
-                "saya"
-            ],
-            "ruang": "64762728"
-        },
-        {
-            "waktu_mulai": "13:00",
-            "waktu_selesai": "14:00",
-            "jurusan": "RPL",
-            "kelas": "1B",
-            "kode_mk": "RL01",
-            "nama_mk": "PRPL",
-            "sks": "4",
-            "dosen": [
-                "Dian Anggraini"
-            ],
-            "ruang": "20.4B.04.001"
         }
     ]
 }

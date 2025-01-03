@@ -29,8 +29,7 @@ def register():
         elif not any(char.isalpha() for char in username):
             print("Username harus mengandung setidaknya satu huruf.")
             continue
-        else:
-            break
+        break
 
     while True:
         password = input("Masukkan password (8 karakter): ").strip()
@@ -177,8 +176,9 @@ def register():
 def login_pengguna():
     # Load data pengguna dari file JSON
     data_pengguna = muat_data()
+    kesempatan = 3 
 
-    while True:
+    while kesempatan > 0:
         print("="*70)
         print("LOGIN".center(70))
         print("="*70)
@@ -188,7 +188,7 @@ def login_pengguna():
         username = input("Masukkan Username   : ")
         if username not in data_pengguna["users"]:
             print("Username tidak tersedia")
-            opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): "))
+            opsiRegister = str(input("Apakah anda ingin melakukan register? (Y/N): ")).strip()
             if opsiRegister.lower() == "y":
                 print("Anda akan di alihkan ke halaman register")
                 time.sleep(2)
@@ -201,58 +201,63 @@ def login_pengguna():
             else:
                 print("Opsi tidak ditemukan, silakan ulangi")
             continue
-        break
 
-    while True: 
         password = input("Masukkan Password   : ")
         if data_pengguna["users"][username]["password"] != password:
-            print("Password anda salah. Pastikan password yang dimasukkan sesuai")
+            kesempatan -= 1
+            print(f"Password anda salah. Sisa kesempatan login: {kesempatan}")
+            time.sleep(2)
+            os.system("cls" if os.name == "nt" else "clear")
             continue
-        break
 
-    if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
-        print("="*70)
-        print("Login Berhasil!")
-        print("="*70)
-        print("Tampilkan Profil Anda (Y/N)")
-        tampilan = input("Y/N: ")
-        if tampilan.lower() == "y":
-            time.sleep(2)
-            os.system("cls" if os.name == "nt" else "clear")
-            
-            profil = data_pengguna["users"][username]["profil"]
-            
-            tampilkan_profil(profil)
-            while True:
-                print("\nPilih opsi:")
-                print("1. Edit Profil")
-                print("2. Menu pengguna")
-                pilihan = input("Pilih opsi (1/2): ").strip()
+        if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
+            print("="*70)
+            print("Login Berhasil!")
+            print("="*70)
+            print("Tampilkan Profil Anda (Y/N)")
+            tampilan = input("Y/N: ").strip()
 
-                if pilihan == "1":
-                    edit_profil(profil, username)
-                    tampilkan_profil(profil)
-                elif pilihan == "2":
-                    os.system("cls" if os.name == "nt" else "clear")
-                    time.sleep(2)
-                    menu_pengguna()
-                    break
-                else:
-                    print("Pilihan tidak valid. Silakan coba lagi.")
+            if tampilan.lower() == "y":
                 time.sleep(2)
-        elif tampilan.lower() == "n":
-            print("Anda akan dialihkan ke halaman menu pengguna")
-            time.sleep(2)
-            os.system("cls" if os.name == "nt" else "clear")
-            menu_pengguna()
-        else:
-            print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
-    else:
-        print("="*70)
-        print("Username dan Password tidak Valid!")
-        print("="*70)
-        
+                os.system("cls" if os.name == "nt" else "clear")
+                
+                profil = data_pengguna["users"][username]["profil"]
+                
+                tampilkan_profil(profil)
+                while True:
+                    print("\nPilih opsi:")
+                    print("1. Edit Profil")
+                    print("2. Menu pengguna")
+                    pilihan = input("Pilih opsi (1/2): ").strip()
 
+                    if pilihan == "1":
+                        edit_profil(profil, username)
+                        tampilkan_profil(profil)
+                    elif pilihan == "2":
+                        os.system("cls" if os.name == "nt" else "clear")
+                        time.sleep(2)
+                        menu_pengguna()
+                        break
+                    else:
+                        print("Pilihan tidak valid. Silakan coba lagi.")
+                    time.sleep(2)
+            elif tampilan.lower() == "n":
+                print("Anda akan dialihkan ke halaman menu pengguna")
+                time.sleep(2)
+                os.system("cls" if os.name == "nt" else "clear")
+                menu_pengguna()
+            else:
+                print("Pilihan Anda tidak tersedia. Silakan masukkan Y atau N.")
+            break
+
+    if kesempatan == 0:
+        print("="*70)
+        print("Kesempatan login anda habis. Anda akan kembali ke menu login awal.")
+        print("="*70)
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
+        menu_login_pengguna()
+        
 def logout():
     print("\nAnda akan logout dari sesi saat ini...")
     time.sleep(2)
@@ -269,7 +274,8 @@ def menu_login_pengguna():
         print("="*70)
         print("1. Login")
         print("2. Sign Up / Register")
-        pilihan = input("Pilih opsi (1/2/3): ")
+
+        pilihan = input("Pilih opsi (1/2): ").strip()
 
         if pilihan == "1":
             print("Anda akan beralih ke form login, mohon tunggu sebentar")
@@ -284,11 +290,8 @@ def menu_login_pengguna():
             register()
             time.sleep(2)
             break
-        elif pilihan == "3":
-            login_tamu()
-            break
         else:
-            print("Pilihan tidak valid. Silakan coba lagi.")
+            print("Pilihan tidak valid. Silakan coba lagi, masukkan angka 1 atau 2.")
 
 def load_jadwal_from_json(file_path):
     with open(file_path, 'r') as file:
@@ -305,28 +308,30 @@ def menu_pengguna():
         print("3. Lihat Profil")
         print("4. Logout")
 
-        opsi = int(input("Pilih opsi (1/2/3/4): "))
-        if opsi == 1: 
+        opsi = input("Pilih opsi (1/2/3/4): ").strip()
+
+        if opsi == "1": 
             os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             print("Denah UPI Cibiru")
             tampilkan_denah()
             print("Denah telah dibuat dan disimpan sebagai 'upi_cibiru.html'")
             continue
-        elif opsi == 2:
+        elif opsi == "2":
             os.system("cls" if os.name == "nt" else "clear")
             time.sleep(1)
             # Memuat jadwal dari file JSON
             jadwal = load_jadwal_from_json('data_jadwal.json')  
             cari_jadwal(jadwal)  
-        elif opsi == 3:
+        elif opsi == "3":
             time.sleep(1)
             os.system("cls" if os.name == "nt" else "clear")
             print("-"*40)
             print("Konfirmasi Identitas")
             print("-"*40)
-            username = input("Masukan username: ")
-            if username in data_pengguna["users"]:
+            username = input("Masukkan username: ")
+            password = input("Masukkan password: ")
+            if username in data_pengguna["users"] and data_pengguna["users"][username]["password"] == password:
                 profil = data_pengguna["users"][username]["profil"]
 
                 time.sleep(1)
@@ -373,16 +378,20 @@ def masuk_tamu():
     print("-"*70)
     print("Apakah anda ingin melakukan melakukan login atau register?")
     print("-"*70)
-    pilihan = input("Pilih opsi (Y/N): ")
+
+    pilihan = input("Pilih opsi (Y/N): ").strip()
+
     if pilihan.lower() == "y":
         time.sleep(2)
         os.system("cls" if os.name == "nt" else "clear")
         menu_login_pengguna()
-    if pilihan.lower() == "n":
+    elif pilihan.lower() == "n":
         print("Anda akan kembali ke menu")
         time.sleep(2)
         os.system("cls" if os.name == "nt" else "clear")
         menu_tamu()
+    else: 
+        print("Pilihan tidak valid, pilih Y atau N")
 
 def menu_tamu():
     print("\n")
@@ -393,24 +402,26 @@ def menu_tamu():
     print("2. Cari Jadwal Kelas")
     print("3. Lihat Profil")
 
-    opsi = int(input("Pilih opsi (1/2/3): "))
-    if opsi == 1: 
+    opsi = input("Pilih opsi (1/2/3): ").strip()
+    
+    if opsi == "1": 
         time.sleep(2)
         os.system("cls" if os.name == "nt" else "clear")
         tampilkan_denah()
         menu_tamu()
-    elif opsi == 2:
+    elif opsi == "2":
         time.sleep(2)
         os.system("cls" if os.name == "nt" else "clear")
         print("\nAnda tidak dapat melihat jadwal. Silahkan lakukan login terlebih dahulu")
         masuk_tamu()
-    elif opsi == 3:
+    elif opsi == "3":
         print("Profil tidak tersedia")
         masuk_tamu()
-    elif opsi == 4:
+    elif opsi == "4":
         logout()
     else: 
-        print("Pilihan tidak valid. Pastikan memilih (1/2/3/4)")
+        print("Pilihan tidak valid. Pastikan memilih (1/2/3)")
+    menu_tamu()
 
 # Menu utama=====================================================================================================================================================================================
 def main():
@@ -427,7 +438,7 @@ def main():
         print("4. Keluar")
         print("=" * 70)
 
-        pilihan = input("Pilih opsi (1/2/3/4): ")
+        pilihan = input("Pilih opsi (1/2/3/4): ").strip()
 
         if not pilihan.isdigit() or int(pilihan) not in range(1, 5):
             print("Pilihan tidak valid. Silakan masukkan angka 1, 2, 3, atau 4.")
@@ -453,7 +464,5 @@ def main():
         elif pilihan == "4":
             print("Terima kasih, sampai bertemu kembali :D ")
             break
-        else:
-            print("Pilihan tidak valid. Silakan coba lagi.")
 
 main()
