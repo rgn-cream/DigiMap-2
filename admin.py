@@ -15,28 +15,28 @@ def login_admin():
         if email != data_admin["admin"].get("email"):
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             ulangiLoginAdmin()
             return
         elif not email:
             print("Email tidak boleh kosong.")
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             ulangiLoginAdmin()
             continue
         elif email.count("@gmail.com") != 1 and email.count("@upi.edu") != 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan sesuai dengan format @gmail.com atau @upi.edu.")
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             ulangiLoginAdmin()
             continue
         elif email.count("@gmail.com") > 1 or email.count("@upi.edu") > 1:
             print("Format email tidak valid. Pastikan email yang dimasukkan hanya memiliki satu domain.")
             print("Email tidak valid, periksa kembali email yang dimasukkan.")
             time.sleep(2)
-            os.system("cls")
+            os.system("cls" if os.name == "nt" else "clear")
             ulangiLoginAdmin()
             continue
         break
@@ -57,13 +57,14 @@ def login_admin():
         print("Login Admin berhasil!")
         print("Anda akan memasuki menu admin. Mohon tunggu sebentar...")
         time.sleep(2)
-        os.system("cls")
+        os.system("cls" if os.name == "nt" else "clear")
         file_path = 'data_jadwal.json'
         menu_admin(file_path)
     else: 
         print("Kesempatan habis! Kembali ke menu awal.")
         time.sleep(2)
-        os.system("cls")
+        os.system("cls" if os.name == "nt" else "clear")
+
         from login_menu import main
         main()
 
@@ -120,27 +121,28 @@ def tambah_jadwal(file_path):
         else:
             break
 
+    # Fungsi untuk mengonversi waktu ke menit
+    def waktu_ke_menit(waktu):
+        jam, menit = map(int, waktu.split(':'))
+        return jam * 60 + menit
+
     # Meminta input waktu mulai
     while True:
         waktu_mulai = input("Masukkan waktu mulai (contoh: 13:00): ").strip()
-        # Memeriksa apakah input valid (format HH:MM)
-        if not waktu_mulai:
-            print("Error: Waktu mulai tidak boleh kosong. Silakan masukkan lagi.")
-        elif not all(part.isdigit() for part in waktu_mulai.split(':')) or len(waktu_mulai.split(':')) != 2:
-            print("Error: Waktu mulai harus dalam format HH:MM dan hanya boleh mengandung angka. Silakan masukkan lagi.")
-        else:
+        if ":" in waktu_mulai and all(part.isdigit() for part in waktu_mulai.split(":")) and len(waktu_mulai.split(":")) == 2:
             break
+        print("Error: Format waktu tidak valid. Gunakan format HH:MM.")
 
     # Meminta input waktu selesai
     while True:
         waktu_selesai = input("Masukkan waktu selesai (contoh: 14:40): ").strip()
-        # Memeriksa apakah input valid (format HH:MM)
-        if not waktu_selesai:
-            print("Error: Waktu selesai tidak boleh kosong. Silakan masukkan lagi.")
-        elif not all(part.isdigit() for part in waktu_selesai.split(':')) or len(waktu_selesai.split(':')) != 2:
-            print("Error: Waktu selesai harus dalam format HH:MM dan hanya boleh mengandung angka. Silakan masukkan lagi.")
+        if ":" in waktu_selesai and all(part.isdigit() for part in waktu_selesai.split(":")) and len(waktu_selesai.split(":")) == 2:
+            if waktu_ke_menit(waktu_selesai) > waktu_ke_menit(waktu_mulai):
+                break
+            print("Error: Waktu selesai tidak boleh sebelum atau sama dengan waktu mulai.")
         else:
-            break
+            print("Error: Format waktu tidak valid. Gunakan format HH:MM.")
+
 
     # Daftar jurusan yang valid
     jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
@@ -157,8 +159,11 @@ def tambah_jadwal(file_path):
         else:
             break 
 
-   # Daftar kelas valid
-    kelas_valid = ["A", "B", "C", "D", "E", "F"]
+    # Daftar kelas valid berdasarkan jurusan
+    if jurusan in ["PGSD"]:
+        kelas_valid = ["A", "B", "C", "D", "E", "F"]
+    else:
+        kelas_valid = ["A", "B", "C"]
 
     # Meminta input kelas
     while True:
@@ -168,7 +173,7 @@ def tambah_jadwal(file_path):
         if not kelas:
             print("Error: Kelas tidak boleh kosong.")
         elif len(kelas) != 2 or not kelas[0].isdigit() or kelas[1] not in kelas_valid:
-            print("Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B).")
+            print(f"Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B). Untuk jurusan {jurusan}, kelas yang valid adalah: {', '.join(kelas_valid)}.")
         else:
             break 
 
@@ -293,6 +298,11 @@ def edit_jadwal(file_path):
     jadwal_edit = data_jadwal[hari][nomor]
     print("Masukkan data baru (tekan Enter untuk tetap menggunakan data lama):")
 
+    # Fungsi untuk mengonversi waktu ke menit
+    def waktu_ke_menit(waktu):
+        jam, menit = map(int, waktu.split(':'))
+        return jam * 60 + menit
+
     # Waktu Mulai
     while True:
         waktu_mulai = input(f"Waktu Mulai [{jadwal_edit['waktu_mulai']}]: ").strip()
@@ -313,12 +323,14 @@ def edit_jadwal(file_path):
             break
         elif not all(part.isdigit() for part in waktu_selesai.split(':')) or len(waktu_selesai.split(':')) != 2:
             print("Error: Waktu selesai harus dalam format HH:MM dan hanya boleh mengandung angka. Silakan masukkan lagi.")
+        elif waktu_ke_menit(waktu_selesai) <= waktu_ke_menit(waktu_mulai):
+            print("Error: Waktu selesai tidak boleh sebelum atau sama dengan waktu mulai.")
         else:
             jadwal_edit['waktu_selesai'] = waktu_selesai
             break
 
     # Jurusan
-    jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
+    jurusan_valid = ["RPL", "TEKKOM", "PGSD", "PMM"]
     while True:
         jurusan = input(f"Jurusan [{jadwal_edit['jurusan']}]: ").upper().strip()
         if not jurusan:
@@ -331,18 +343,22 @@ def edit_jadwal(file_path):
             break
 
     # Kelas
-    kelas_valid = ["A", "B", "C", "D", "E", "F"]
+    if jadwal_edit['jurusan'] in ["PGSD"]:
+        kelas_valid = ["A", "B", "C", "D", "E", "F"]
+    else:
+        kelas_valid = ["A", "B", "C"]
+
     while True:
         kelas = input(f"Kelas [{jadwal_edit['kelas']}]: ").upper().strip()
         if not kelas:
             kelas = jadwal_edit['kelas']  # Tetap menggunakan data lama
             break
         elif len(kelas) != 2 or not kelas[0].isdigit() or kelas[1] not in kelas_valid:
-            print("Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B).")
+            print(f"Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B). Untuk jurusan {jadwal_edit['jurusan']}, kelas yang valid adalah: {', '.join(kelas_valid)}.")
         else:
             jadwal_edit['kelas'] = kelas
             break
-
+        
     # Kode Mata Kuliah
     while True:
         kode_mk = input(f"Kode MK [{jadwal_edit['kode_mk']}]: ").strip()

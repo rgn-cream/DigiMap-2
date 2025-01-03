@@ -80,31 +80,64 @@ def register():
             continue
         break
 
+    # while True:
+    #     kelas = input("Masukkan kelas (contoh: RPL 1B, note: prodi berupa singkatan): ").strip()
+    #     if not kelas:
+    #         print("Kelas tidak boleh kosong.")
+    #         continue
+    #     try:
+    #         bagian = kelas.split()
+    #         if len(bagian) != 2:
+    #             raise ValueError
+    #         program, subkelas = bagian
+    #         if program.upper() not in ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]:
+    #             raise ValueError
+    #         if program.upper() == "RPL" or program.upper() == "TEKKOM":
+    #             if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C"]:
+    #                 break
+    #             else:
+    #                 raise ValueError
+    #         else:
+    #             if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C", "D", "E", "F"]:
+    #                 break
+    #             else:
+    #                 raise ValueError
+    #     except ValueError:
+    #         print("Kelas tidak valid. Pastikan format dan program sesuai dengan aturan.")
+    #         continue
+
+    # Daftar jurusan yang valid
+    jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
+
+    # Meminta input jurusan
     while True:
-        kelas = input("Masukkan kelas (contoh: RPL 1B, note: prodi berupa singkatan): ").strip()
+        jurusan = input("Masukkan jurusan (contoh: RPL): ").upper().strip()
+        
+        # Validasi input
+        if not jurusan:
+            print("Error: Jurusan tidak boleh kosong. Silakan masukkan lagi.")
+        elif jurusan not in jurusan_valid:
+            print("Error: Jurusan tidak valid. Harap masukkan salah satu dari: RPL, TEKKOM, PGPAUD, PGSD, PMM.")
+        else:
+            break 
+
+    # Daftar kelas valid berdasarkan jurusan
+    if jurusan in ["PGSD"]:
+        kelas_valid = ["A", "B", "C", "D", "E", "F"]
+    else:
+        kelas_valid = ["A", "B", "C"]
+
+    # Meminta input kelas
+    while True:
+        kelas = input("Masukkan kelas (contoh: 1B): ").upper().strip()
+
+        # Validasi input
         if not kelas:
-            print("Kelas tidak boleh kosong.")
-            continue
-        try:
-            bagian = kelas.split()
-            if len(bagian) != 2:
-                raise ValueError
-            program, subkelas = bagian
-            if program.upper() not in ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]:
-                raise ValueError
-            if program.upper() == "RPL" or program.upper() == "TEKKOM":
-                if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C"]:
-                    break
-                else:
-                    raise ValueError
-            else:
-                if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C", "D", "E", "F"]:
-                    break
-                else:
-                    raise ValueError
-        except ValueError:
-            print("Kelas tidak valid. Pastikan format dan program sesuai dengan aturan.")
-            continue
+            print("Error: Kelas tidak boleh kosong.")
+        elif len(kelas) != 2 or not kelas[0].isdigit() or kelas[1] not in kelas_valid:
+            print(f"Error: Kelas harus terdiri dari 1 digit diikuti oleh 1 huruf (contoh: 1B). Untuk jurusan {jurusan}, kelas yang valid adalah: {', '.join(kelas_valid)}.")
+        else:
+            break 
 
     while True:
         tanggal_lahir = input("Masukkan tanggal lahir (DD-MM-YYYY): ").strip()
@@ -155,6 +188,7 @@ def register():
         "profil": {
             "nama": nama,
             "NIM": NIM,
+            "jurusan": jurusan,
             "kelas": kelas,
             "tanggal_lahir": tanggal_lahir,
             "no_telepon": no_telepon,
