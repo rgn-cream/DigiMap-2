@@ -63,7 +63,7 @@
         "tubes": {
             "password": "tubesyummy24",
             "profil": {
-                "nama": "tubes",
+                "nama": "Tugas Besar",
                 "NIM": "2406043",
                 "jurusan": "RPL",
                 "kelas": "1b",
@@ -81,6 +81,18 @@
                 "kelas": "1B",
                 "tanggal_lahir": "02-02-2020",
                 "no_telepon": "0987654320",
+                "email": "digimap@upi.edu"
+            }
+        },
+        "tugas_besar": {
+            "password": "tugas_besar1",
+            "profil": {
+                "nama": "DigiMap",
+                "NIM": "2456789",
+                "jurusan": "RPL",
+                "kelas": "1B",
+                "tanggal_lahir": "24-02-2024",
+                "no_telepon": "08987654321",
                 "email": "digimap@upi.edu"
             }
         }

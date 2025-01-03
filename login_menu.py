@@ -80,32 +80,6 @@ def register():
             continue
         break
 
-    # while True:
-    #     kelas = input("Masukkan kelas (contoh: RPL 1B, note: prodi berupa singkatan): ").strip()
-    #     if not kelas:
-    #         print("Kelas tidak boleh kosong.")
-    #         continue
-    #     try:
-    #         bagian = kelas.split()
-    #         if len(bagian) != 2:
-    #             raise ValueError
-    #         program, subkelas = bagian
-    #         if program.upper() not in ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]:
-    #             raise ValueError
-    #         if program.upper() == "RPL" or program.upper() == "TEKKOM":
-    #             if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C"]:
-    #                 break
-    #             else:
-    #                 raise ValueError
-    #         else:
-    #             if subkelas[:-1].isdigit() and int(subkelas[:-1]) in range(1, 8) and subkelas[-1].upper() in ["A", "B", "C", "D", "E", "F"]:
-    #                 break
-    #             else:
-    #                 raise ValueError
-    #     except ValueError:
-    #         print("Kelas tidak valid. Pastikan format dan program sesuai dengan aturan.")
-    #         continue
-
     # Daftar jurusan yang valid
     jurusan_valid = ["RPL", "TEKKOM", "PGPAUD", "PGSD", "PMM"]
 

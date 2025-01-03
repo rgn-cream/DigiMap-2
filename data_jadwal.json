@@ -1454,19 +1454,6 @@
                 "Dr. Dinie Anggraeni Dewi, M.Pd. "
             ],
             "ruang": "20.4B.05.009"
-        },
-        {
-            "waktu_mulai": "13:00",
-            "waktu_selesai": "14:40",
-            "jurusan": "PMM",
-            "kelas": "1C",
-            "kode_mk": "KU106",
-            "nama_mk": "Pend. Bahasa Indonesia",
-            "sks": 2,
-            "dosen": [
-                "Dr. Kurniawati, S.Pd., M.Pd. "
-            ],
-            "ruang": ""
         }
     ]
 }
