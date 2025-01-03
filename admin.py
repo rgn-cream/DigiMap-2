@@ -255,9 +255,9 @@ def tambah_jadwal(file_path):
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil ditambahkan!")
     print("Anda akan dialihkan ke menu utama") 
-    os.system("cls" if os.name == "nt" else "clear")
     time.sleep(2)
-    
+    os.system("cls" if os.name == "nt" else "clear")
+
 # Fungsi untuk mengedit jadwal
 def edit_jadwal(file_path):
     print("="*70)
@@ -383,14 +383,26 @@ def edit_jadwal(file_path):
             jadwal_edit['dosen'] = [dosen.strip() for dosen in dosen.split(',')]
             break
 
+    # Ruangan
+    while True:
+        ruang = input(f"Ruang [{jadwal_edit['ruang']}]: ").strip()
+        if not ruang:
+            print("Menggunakan nilai ruangan sebelumnya.")
+            break
+        elif len(ruang.split('.')) != 4 or not all(part.isalnum() for part in ruang.split('.')):
+            print("Error: Format ruang tidak valid. Harap masukkan sesuai format (contoh: 20.4B.04.001).")
+        else:
+            jadwal_edit['ruang'] = ruang  # Update nilai ruangan
+            break
+
     # Simpan perubahan
     data_jadwal[hari][nomor] = jadwal_edit
     simpan_data(file_path, data_jadwal)
     print("Jadwal berhasil diperbarui.")
 
     print("Anda akan dialihkan ke menu utama")
-    os.system("cls" if os.name == "nt" else "clear")
     time.sleep(2)
+    os.system("cls" if os.name == "nt" else "clear")
 
 # Fungsi untuk menghapus jadwal
 def hapus_jadwal(file_path):
@@ -436,8 +448,8 @@ def hapus_jadwal(file_path):
     print("Jadwal berhasil dihapus!")
 
     print("Anda akan dialihkan ke menu utama")
-    os.system("cls" if os.name == "nt" else "clear")
     time.sleep(2)
+    os.system("cls" if os.name == "nt" else "clear")
 
 # Fungsi utama untuk menampilkan menu
 def menu_admin(file_path):
