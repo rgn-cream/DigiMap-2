@@ -358,7 +358,33 @@ def edit_jadwal(file_path):
         else:
             jadwal_edit['kelas'] = kelas
             break
-        
+
+    # Nama Mata Kuliah
+    while True:
+        nama_mk = input(f"Nama Mata Kuliah [{jadwal_edit['nama_mk']}]: ").strip()
+        if not nama_mk:
+            nama_mk = jadwal_edit['nama_mk']  # Tetap menggunakan data lama
+            break
+        elif not nama_mk.replace(" ", "").isalpha():
+            print("Error: Nama mata kuliah hanya boleh terdiri dari huruf dan spasi.")
+        else:
+            jadwal_edit['nama_mk'] = nama_mk
+            break
+
+    # SKS
+    while True:
+        sks = input(f"SKS [{jadwal_edit['sks']}]: ").strip()
+        if not sks:
+            sks = jadwal_edit['sks']  # Tetap menggunakan data lama
+            break
+        elif not sks.isdigit():
+            print("Error: SKS harus berupa angka bulat (integer).")
+        elif not (1 <= int(sks) <= 6):
+            print("Error: SKS harus berada dalam rentang 1 hingga 6.")
+        else:
+            jadwal_edit['sks'] = int(sks)
+            break
+
     # Kode Mata Kuliah
     while True:
         kode_mk = input(f"Kode MK [{jadwal_edit['kode_mk']}]: ").strip()
